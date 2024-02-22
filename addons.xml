@@ -5,9 +5,9 @@
 		<import addon="xbmc.gui" version="5.14.0"/>
 	</requires>
 	<extension point="xbmc.addon.repository" name="maltsev repository">
-		<info compressed="true">https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi18/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi18/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi18/</datadir>
+		<info compressed="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi18/addons.xml</info>
+		<checksum>https://raw.github.com/maltsevvv/repository-kodi/master/kodi18/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi18/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Addons for Kodi 18</summary>
@@ -21,9 +21,9 @@
 		<import addon="xbmc.gui" version="5.15.0"/>
 	</requires>
 	<extension point="xbmc.addon.repository" name="maltsev repository">
-		<info compressed="true">https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi19/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi19/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi19/</datadir>
+		<info compressed="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi19/addons.xml</info>
+		<checksum>https://raw.github.com//maltsevvv/repository-kodi/master/kodi19/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi19/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Addons for Kodi 19</summary>
