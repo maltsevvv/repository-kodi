@@ -1,51 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="skin.audi" version="19.2.7" name="Audi" provider-name="Maltsev">
-	<requires>
-		<import addon="xbmc.gui" version="5.15.0"/>
-	</requires>
-	<extension point="xbmc.gui.skin" debugging="false">
-		<res width="1024" height="768" default="true" folder="xml" />
-	</extension>
-	<extension point="xbmc.service" library="addon.py" start="login">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">AUDI Navigation plus</summary>
-		<summary lang="ru">AUDI Navigation plus</summary>
-		<description lang="en">Audi cover specially written in the style of AUDI Navigation plus, for comfortable use on the car screen. The control of standard buttons on the car radio is also implemented. https://sites.google.com/view/rnspi </description>
-		<description lang="ru">Обложка Audi написана специально в стиле AUDI Navigation plus, для комфортного пользования на автомобильом экране. Так же реализовано управление штатными кнопками на автомагнитоле. https://sites.google.com/view/rnspi </description>
-		<platform>all</platform>
-		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-		<website>https://sites.google.com/view/rnspi/</website>
-		<assets>
-			<icon>icon.png</icon>
-		</assets>
-	</extension>
-</addon>
-<addon id="skin.audi" version="19.2.8" name="Audi" provider-name="Maltsev">
-	<requires>
-		<import addon="xbmc.gui" version="5.15.0"/>
-	</requires>
-	<extension point="xbmc.gui.skin" debugging="false">
-		<res width="1024" height="768" default="true" folder="xml" />
-	</extension>
-	<extension point="xbmc.service" library="addon.py" start="login">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">AUDI Navigation plus</summary>
-		<summary lang="ru">AUDI Navigation plus</summary>
-		<description lang="en">Audi cover specially written in the style of AUDI Navigation plus, for comfortable use on the car screen. The control of standard buttons on the car radio is also implemented. https://sites.google.com/view/rnspi </description>
-		<description lang="ru">Обложка Audi написана специально в стиле AUDI Navigation plus, для комфортного пользования на автомобильом экране. Так же реализовано управление штатными кнопками на автомагнитоле. https://sites.google.com/view/rnspi </description>
-		<platform>all</platform>
-		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-		<website>https://sites.google.com/view/rnspi/</website>
-		<assets>
-			<icon>icon.png</icon>
-		</assets>
-	</extension>
-</addon>
 <addon id="skin.audi" version="19.3.0" name="Audi" provider-name="Maltsev">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0"/>
