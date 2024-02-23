@@ -21,7 +21,7 @@ hciconfig
 `  если  DOWN` `значит не работает. Необходимо обновить ядро.`  
 `        RX bytes:706 acl:0 sco:0 events:22 errors:0`  
 `        TX bytes:68 acl:0 sco:0 commands:22 errors:0`  
-
+#### Проверяем версию ядра, если `4.19.97-v7+`, то необходимо обновить
 ```
 uname -a
 ```
@@ -43,6 +43,20 @@ hciconfig
 `        RX bytes:706 acl:0 sco:0 events:22 errors:0`  
 `        TX bytes:68 acl:0 sco:0 commands:22 errors:0`  
 
+#### Некоторые смартфоны, не подключаются без ввода кода  
+```
+sudo bluetoothctl
+```
+#### Пытакмся подключиться к `RNS`, чтоб увидеть MAC устройсива.  
+```
+sudo bluetoothctl
+```
+  
+`connect` `Ваш mac`  
+`pair` `Ваш mac`  
+`trust` `Ваш mac`  
+
+
 #### Отключить встроенный BT в raspberry pi  
 ```
 sudo nano /boot/config.txt
@@ -51,9 +65,3 @@ sudo nano /boot/config.txt
 ```
 sudo reboot
 ```
-
-sudo bluetoothctl
-
-pair mac
-
-sudo bluetoothctl
