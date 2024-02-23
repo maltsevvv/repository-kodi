@@ -28,12 +28,11 @@ uname -a
 ```
 sudo apt update -y
 ```  
-```sudo rpi-update```  
+```
+sudo rpi-update
+```  
 ```
 sudo reboot
-
-
-sudo rpi-update
 ```
 ```
 sudo nano /boot/config.txt
