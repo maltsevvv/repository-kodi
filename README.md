@@ -18,9 +18,10 @@ hciconfig
 ```
 `hci0:   Type: Primary  Bus: USB`  
 `        BD Address: 00:1A:7D:DA:71:13  ACL MTU: 679:8  SCO MTU: 48:16`  
-`        DOWN` `если видим DOWN, значит не работает. Необходимо обновить ядро`  
+`  если  DOWN` `значит не работает. Необходимо обновить ядро.`  
 `        RX bytes:706 acl:0 sco:0 events:22 errors:0`  
 `        TX bytes:68 acl:0 sco:0 commands:22 errors:0`  
+
 ```
 uname -a
 ```
@@ -28,19 +29,17 @@ uname -a
 
 ```
 sudo apt update -y
-```  
-```
 sudo rpi-update
-```  
-```
+
 sudo reboot
 ```
+#### Проверяем статкс USB BT адаптера.
 ```
 hciconfig
 ```
 `hci0:   Type: Primary  Bus: USB`  
 `        BD Address: 00:1A:7D:DA:71:13  ACL MTU: 679:8  SCO MTU: 48:16`  
-`        UP` `теперь UP. И к нему можно подключиться.`  
+`  видим UP` `Работает, и к нему можно подключиться.`  
 `        RX bytes:706 acl:0 sco:0 events:22 errors:0`  
 `        TX bytes:68 acl:0 sco:0 commands:22 errors:0`  
 
