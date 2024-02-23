@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="repository.maltsev_kodi-18" name="repository maltsev kodi 18" version="1.0.0" provider-name="Maltsev">
+<addon id="repository.maltsev_kodi-18" name="Maltsev Add-on repository " version="1.0.0" provider-name="Maltsev">
 	<requires>
 		<import addon="xbmc.gui" version="5.14.0"/>
 	</requires>
-	<extension point="xbmc.addon.repository" name="maltsev repository">
+	<extension point="xbmc.addon.repository" name="Maltsev Add-on repository ">
 		<info compressed="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi18/addons.xml</info>
 		<checksum>https://raw.github.com/maltsevvv/repository-kodi/master/kodi18/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi18/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>Addons for Kodi 18</summary>
-		<summary lang="en">Addons for Kodi 18</summary>
-		<description>maltsev repository</description>
+		<summary>Addons For Kodi</summary>
+		<summary lang="en">Addons For Kodi</summary>
+		<description>Maltsev Add-on repository </description>
 		<platform>all</platform>
 	</extension>
 </addon>
@@ -20,15 +20,15 @@
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0"/>
 	</requires>
-	<extension point="xbmc.addon.repository" name="maltsev repository">
+	<extension point="xbmc.addon.repository" name="Maltsev Add-on repository ">
 		<info compressed="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi19/addons.xml</info>
 		<checksum>https://raw.github.com//maltsevvv/repository-kodi/master/kodi19/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi19/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>Addons for Kodi 19</summary>
-		<summary lang="en">Addons for Kodi 19</summary>
-		<description>maltsev repository</description>
+		<summary>Addons For Kodi</summary>
+		<summary lang="en">Addons For Kodi</summary>
+		<description>Maltsev Add-on repository </description>
 		<platform>all</platform>
 	</extension>
 </addon>
