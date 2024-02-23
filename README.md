@@ -25,14 +25,8 @@ uname -a
 ```
 `Linux rns 4.19.97-v7+`
 
-```
-#sudo rmmod btusb
-#sudo modprobe btusb
-sudo apt update -y
-sudo apt upgrade -y
-sudo apt autoremove -y
-
-sudo rpi-update
+```sudo apt update -y```  
+```sudo rpi-update```  
 
 sudo reboot
 
