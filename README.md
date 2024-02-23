@@ -25,9 +25,11 @@ uname -a
 ```
 `Linux rns 4.19.97-v7+`
 
-```sudo apt update -y```  
+```
+sudo apt update -y
+```  
 ```sudo rpi-update```  
-
+```
 sudo reboot
 
 
