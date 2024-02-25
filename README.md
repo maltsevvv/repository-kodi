@@ -19,7 +19,7 @@ sudo sh /tmp/splash.sh
     power on
     agent on
 
-`   # Now search for available bluetooth devices from your device
+`   # Now search for available bluetooth devices from your device 
     # Once paired note down the MAC address of your device` 
 
     trust 00:00:00:00:00:00 # Put device MAC address here so after reboot it can automatically re-connect again
