@@ -22,12 +22,9 @@
 
     sudo bluetoothctl
 
-
     scan on
 
-
     connect 00:00:00:00:00:00
-
 
     trust 00:00:00:00:00:00
 
