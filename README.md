@@ -70,7 +70,7 @@
 
 `0 [b1             ]: bcm2835_hdmi - bcm2835 HDMI 1`  
 `1 [Headphones     ]: bcm2835_headpho - bcm2835 Headphones`  
-`2 [hifi-berry dac5102]: `
+`2 [sndrpihifiberry]: RPi-simple - snd_rpi_hifiberry_dac`
 
     sudo nano /etc/asound.conf
 
