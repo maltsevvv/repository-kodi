@@ -494,9 +494,9 @@ EOF
 EOF
 fi
 
-  cp /boot/canserial.txt /home/pi/.canserial.txt
-  cp /boot/.canserial.txt /home/pi/.canserial.txt
-  chown -R pi:pi /home/pi/
+cp /boot/canserial.txt /home/pi/.canserial.txt
+cp /boot/.canserial.txt /home/pi/.canserial.txt
+chown -R pi:pi /home/pi/
 if (whiptail --title "Installation Completed" --yesno "Reboot System Now" 10 60) then
   reboot
 fi
