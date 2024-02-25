@@ -251,16 +251,17 @@ EOF
 defaults.pcm.card 0
 defaults.ctl.card 0
 EOF
-  echo "---------------------------------------------------------"
-  echo "Disable Raspberry Pi Bluetooth chipset"
-  echo "---------------------------------------------------------"
-  # cat <<'EOF' >> /boot/config.txt
-
-# # Disable Raspberry Pi Bluetooth chipset
-# dtoverlay=disable-bt
-# EOF
   fi
+  if grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
+    echo "---------------------------------------------------------"
+    echo "Disable Raspberry Pi Bluetooth chipset"
+    echo "---------------------------------------------------------"
+    cat <<'EOF' >> /boot/config.txt
 
+# Disable Raspberry Pi Bluetooth chipset
+dtoverlay=disable-bt
+EOF
+  fi
 else
   echo "---------------------------------------------------------"
   echo "YOU CANCELED THE INSTALLATION BLUETOOTH RECIEVER"
