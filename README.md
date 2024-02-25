@@ -74,8 +74,8 @@
 
     sudo nano /etc/asound.conf
 
-`defaults.pcm.card 0`  
-`defaults.ctl.card 0`
+`defaults.pcm.card 0` `заменить цифру, на номер Вашей карты`  
+`defaults.ctl.card 0` `заменить цифру, на номер Вашей карты`  
 
 ### change image on load system. ONLY BUSTER
 
