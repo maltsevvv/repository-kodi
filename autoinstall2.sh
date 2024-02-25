@@ -251,12 +251,16 @@ EOF
 defaults.pcm.card 0
 defaults.ctl.card 0
 EOF
+  echo "---------------------------------------------------------"
+  echo "Disable Raspberry Pi Bluetooth chipset"
+  echo "---------------------------------------------------------"
+  # cat <<'EOF' >> /boot/config.txt
+
+# # Disable Raspberry Pi Bluetooth chipset
+# dtoverlay=disable-bt
+# EOF
   fi
-#  if (whiptail --title "USB Bluetooth Adapter" --yesno "Are you using an external usb bluetooth?." 10 60) then
-#    systemctl disable hciuart
-#    modprobe btusb
-#    rpi-update
-#  fi
+
 else
   echo "---------------------------------------------------------"
   echo "YOU CANCELED THE INSTALLATION BLUETOOTH RECIEVER"
@@ -426,28 +430,23 @@ if (whiptail --title "Enable PCM5102 audio card" --yesno "Use HiFiberry. Audio C
   echo "---------------------------------------------------------"
   echo "Enable pcm5102 audio card"
   echo "---------------------------------------------------------"
-  sed -i 's/dtparam=audio=on/#dtparam=audio=on/' /boot/config.txt
+  #sed -i 's/dtparam=audio=on/#dtparam=audio=on/' /boot/config.txt
   cat <<'EOF' >> /boot/config.txt
 
 # Enable audio card (HifiBerry DAC HiFi pcm5102a-hifi)
 dtoverlay=hifiberry-dac
 EOF
-  #OS BULLSEYE
-  if grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
-    sed -i 's/defaults.pcm.card 0/defaults.pcm.card 2/' /etc/asound.conf
-    sed -i 's/defaults.ctl.card 0/defaults.ctl.card 2/' /etc/asound.conf
-  fi
+  sed -i 's/defaults.pcm.card 0/defaults.pcm.card 2/' /etc/asound.conf
+  sed -i 's/defaults.ctl.card 0/defaults.ctl.card 2/' /etc/asound.conf
+
 else
   echo "---------------------------------------------------------"
   echo "Enable audio 3,5mm"
   echo "---------------------------------------------------------"
   sed -i '/# Enable audio card (HifiBerry DAC HiFi pcm5102a-hifi)/d' /boot/config.txt
   sed -i '/dtoverlay=hifiberry-dac/d' /boot/config.txt
-  #OS BULLSEYE
-  if grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
-    sed -i 's/defaults.pcm.card 0/defaults.pcm.card 1/' /etc/asound.conf
-    sed -i 's/defaults.ctl.card 0/defaults.ctl.card 1/' /etc/asound.conf
-  fi
+  sed -i 's/defaults.pcm.card 0/defaults.pcm.card 1/' /etc/asound.conf
+  sed -i 's/defaults.ctl.card 0/defaults.ctl.card 1/' /etc/asound.conf
 fi
 
 echo "---------------------------------------------------------"
@@ -495,9 +494,9 @@ EOF
 EOF
 fi
 
-if (whiptail --title "Installation Completed" --yesno "Reboot System Now" 10 60) then
   cp /boot/canserial.txt /home/pi/.canserial.txt
   cp /boot/.canserial.txt /home/pi/.canserial.txt
   chown -R pi:pi /home/pi/
+if (whiptail --title "Installation Completed" --yesno "Reboot System Now" 10 60) then
   reboot
 fi
