@@ -15,9 +15,7 @@ echo "---------------------------------------------------------"
 echo "Update & Upgrade"
 echo "---------------------------------------------------------"
 apt update -y
-
 apt upgrade -y
-
 apt autoremove -y
 
 echo "---------------------------------------------------------"
@@ -55,7 +53,8 @@ if [ ! $? = 0 ]; then
   whiptail --title "KODI INSTALLATION ERROR" --msgbox "PLEASE RESTART THE INSTALLER!" 10 60
   exit 0
 fi
-sed -i '/service.xbmc.versioncheck/d' /usr/share/kodi/system/addon-manifest.xml #Disable versioncheck
+#Disable versioncheck
+sed -i '/service.xbmc.versioncheck/d' /usr/share/kodi/system/addon-manifest.xml
 apt install -y kodi-pvr-iptvsimple
 if ! grep -q "/usr/bin/kodi-standalone" /etc/systemd/system/kodi.service; then
   cat <<'EOF' > /etc/systemd/system/kodi.service
@@ -138,9 +137,9 @@ if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
     exit 0
   fi
 fi
-####
+
 ##############################################
-#         INSTALL BLUETOOTHE RECIEVER        #
+#         INSTALL BLUETOOTH RECIEVER        #
 ##############################################
 if (whiptail --title "Bluetooth audio receiver installer" --yesno "Install Bluetooth Audio Receive." 10 60) then
   echo "---------------------------------------------------------"
@@ -248,22 +247,18 @@ EOF
   echo "---------------------------------------------------------"
   if ! grep -q 'defaults.ctl.card 0' /etc/asound.conf; then
     cat <<'EOF' > /etc/asound.conf
-defaults.ctl.card 0
+defaults.pcm.card 0
 defaults.ctl.card 0
 EOF
   fi
-#  if (whiptail --title "USB Bluetooth Adapter" --yesno "Are you using an external usb bluetooth?." 10 60) then
-#    systemctl disable hciuart
-#    modprobe btusb
-#    rpi-update
-#  fi
+
 else
   echo "---------------------------------------------------------"
   echo "YOU CANCELED THE INSTALLATION BLUETOOTH RECIEVER"
   echo "---------------------------------------------------------"
 fi
 ##############################################
-####
+
 if (systemctl -q is-active kodi.service); then
   systemctl stop kodi.service
   sleep 10
@@ -272,18 +267,8 @@ elif (systemctl -q is-active kodi.service); then
   sleep 10
 exit 1
 fi
-####
-##############################################
-#        INSTALL Bluetooth Manager           #
-##############################################
-# if grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
-	# if grep -q 'defaults.ctl.card 0' /etc/asound.conf; then
-		# rm -r /home/pi/.kodi/addons/*bluetooth*
-		# unzip /home/pi/.kodi/addons/skin.rns*/resources/Bluetooth*.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
-		# sed -i -e '$i \  <addon optional="true">script.bluetooth.man</addon>' /usr/share/kodi/system/addon-manifest.xml
-	# fi
-# fi
-####
+
+
 ##############################################
 #               INSTALL SKIN                 #
 ##############################################
@@ -299,11 +284,10 @@ fi
 rm -r /home/pi/.kodi/addons/skin.audi_rns*
 unzip /tmp/skin.audi_rns*.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
 unzip /tmp/repository.maltsev_kod*.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
-# chown -R pi:pi /home/pi/.kodi/addons/
 sed -i -e '$i \  <addon optional="true">skin.audi_rns</addon>' /usr/share/kodi/system/addon-manifest.xml
 sed -i -e 's/lookandfeel.skin" default="true">skin.estuary/lookandfeel.skin">skin.audi_rns/' /home/pi/.kodi/userdata/guisettings.xml
 
-####
+
 echo "---------------------------------------------------------"
 echo "CREATING MEDIA FOLDER"
 echo "---------------------------------------------------------"
@@ -367,7 +351,6 @@ cat <<'EOF' > /home/pi/.kodi/userdata/sources.xml
     </games>
 </sources>
 EOF
-#chown pi:pi /home/pi/.kodi/userdata/sources.xml
 
 # Disable Screensaver
 sed -i 's/id="screensaver.mode" default="true">screensaver.xbmc.builtin.dim/id="screensaver.mode">/' /home/pi/.kodi/userdata/guisettings.xml
@@ -383,12 +366,10 @@ sed -i 's/volumeamplification>0.000000/volumeamplification>30.000000/' /home/pi/
 sed -i 's/id="services.webserverauthentication" default="true">true/id="services.webserverauthentication">false/' /home/pi/.kodi/userdata/guisettings.xml
 sed -i 's/id="services.webserver" default="true">false/id="services.webserver">true/' /home/pi/.kodi/userdata/guisettings.xml
 
-#chown
-chown -R pi:pi /home/pi/
+
 ##############################################
 #            EDIT /boot/config.txt           #
 ##############################################
-
 cp /boot/config.txt /boot/config_orig.txt 
 if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Output?" 10 60) then
   echo "---------------------------------------------------------"
@@ -432,6 +413,7 @@ if (whiptail --title "Enable PCM5102 audio card" --yesno "Use HiFiberry. Audio C
 # Enable audio card (HifiBerry DAC HiFi pcm5102a-hifi)
 dtoverlay=hifiberry-dac
 EOF
+
 else
   echo "---------------------------------------------------------"
   echo "Enable audio 3,5mm"
@@ -485,9 +467,12 @@ EOF
 EOF
 fi
 
+cp /boot/canserial.txt /home/pi/.canserial.txt
+cp /boot/.canserial.txt /home/pi/.canserial.txt
+
+
+chown -R pi:pi /home/pi/
+
 if (whiptail --title "Installation Completed" --yesno "Reboot System Now" 10 60) then
-  cp /boot/canserial.txt /home/pi/.canserial.txt
-  cp /boot/.canserial.txt /home/pi/.canserial.txt
-  chown -R pi:pi /home/pi/
   reboot
 fi
