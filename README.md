@@ -62,6 +62,21 @@
     sudo reboot
 
 
+## Подключается, но нет звука
+
+Проверить номер идентификатора аудио карты
+
+    cat /proc/asound/cards
+
+`0 [b1             ]: bcm2835_hdmi - bcm2835 HDMI 1`  
+`1 [Headphones     ]: bcm2835_headpho - bcm2835 Headphones`  
+`2 [hifi-berry dac5102]: `
+
+    sudo nano /etc/asound.conf
+
+`defaults.pcm.card 0`  
+`defaults.ctl.card 0`
+
 ### change image on load system. ONLY BUSTER
 
 
