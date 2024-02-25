@@ -139,7 +139,7 @@ if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
 fi
 
 ##############################################
-#         INSTALL BLUETOOTHE RECIEVER        #
+#         INSTALL BLUETOOTH RECIEVER        #
 ##############################################
 if (whiptail --title "Bluetooth audio receiver installer" --yesno "Install Bluetooth Audio Receive." 10 60) then
   echo "---------------------------------------------------------"
@@ -291,10 +291,8 @@ sed -i -e 's/lookandfeel.skin" default="true">skin.estuary/lookandfeel.skin">ski
 echo "---------------------------------------------------------"
 echo "CREATING MEDIA FOLDER"
 echo "---------------------------------------------------------"
-mkdir -p /home/pi/{movies,music,mults,clips} > /dev/null 2>&1
-chmod -R 0777 /home/pi/{movies,music,mults,clips}
-#mkdir /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips > /dev/null 2>&1
-#chmod -R 0777 /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips > /dev/null 2>&1
+mkdir /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips > /dev/null 2>&1
+chmod -R 0777 /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips > /dev/null 2>&1
 ##############################################
 #                SETTINGS KODI               #
 ##############################################
@@ -415,8 +413,6 @@ if (whiptail --title "Enable PCM5102 audio card" --yesno "Use HiFiberry. Audio C
 # Enable audio card (HifiBerry DAC HiFi pcm5102a-hifi)
 dtoverlay=hifiberry-dac
 EOF
-  # sed -i 's/defaults.pcm.card 0/defaults.pcm.card 2/' /etc/asound.conf
-  # sed -i 's/defaults.ctl.card 0/defaults.ctl.card 2/' /etc/asound.conf
 
 else
   echo "---------------------------------------------------------"
@@ -424,8 +420,6 @@ else
   echo "---------------------------------------------------------"
   sed -i '/# Enable audio card (HifiBerry DAC HiFi pcm5102a-hifi)/d' /boot/config.txt
   sed -i '/dtoverlay=hifiberry-dac/d' /boot/config.txt
-  # sed -i 's/defaults.pcm.card 0/defaults.pcm.card 1/' /etc/asound.conf
-  # sed -i 's/defaults.ctl.card 0/defaults.ctl.card 1/' /etc/asound.conf
 fi
 
 echo "---------------------------------------------------------"
