@@ -11,7 +11,20 @@ wget -P /tmp https://raw.githubusercontent.com/maltsevvv/maltsev-Kodi-Repo/maste
 sudo sh /tmp/splash.sh
 ```
 
-## USB Bluetoothe модуль V5 for Buster
+### Добавить устройства Bluetooth
+
+Устройство должно быть доступно для новых подключений Bluetooth, но в некоторых случаях вам может потребоваться выполнить сопряжение вручную:
+
+    sudo bluetoothctl
+    power on
+    agent on
+
+`   # Now search for available bluetooth devices from your device
+    # Once paired note down the MAC address of your device` 
+
+    trust 00:00:00:00:00:00 # Put device MAC address here so after reboot it can automatically re-connect again
+
+## OS BUSTER (Kodi 19) USB Bluetoothe модуль V5
 #### Прверяем определила ли система Ваш BT модуль.  
 ```
 hciconfig
@@ -43,20 +56,6 @@ hciconfig
 `  видим UP` `Работает, и к нему можно подключиться.`  
 `        RX bytes:706 acl:0 sco:0 events:22 errors:0`  
 `        TX bytes:68 acl:0 sco:0 commands:22 errors:0`  
-
-#### Некоторые смартфоны, не подключаются без ввода кода  
-```
-sudo bluetoothctl
-```
-#### Пытаемся подключиться к `RNS`, чтоб увидеть `Ваш mac` устройсива.  
-```
-sudo bluetoothctl
-```
-  
-`connect` `Ваш mac`  
-`pair` `Ваш mac`  
-`trust` `Ваш mac`  
-
 
 #### Отключить встроенный BT в raspberry pi  
 ```
