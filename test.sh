@@ -131,13 +131,13 @@ echo "---------------------------------------------------------"
 echo "Installing Python-can"
 echo "---------------------------------------------------------"
 if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-  apt install python-can
+  apt install -y python-can
   if [ ! $? = 0 ]; then
     whiptail --title "PYTHON-CAN INSTALLATION ERROR" --msgbox "PLEASE RESTART THE INSTALLER! \nsudo sh install.sh" 10 60
     exit 0
   fi
 else
-  apt install python3-can
+  apt install -y python3-can
   if [ ! $? = 0 ]; then
     whiptail --title "PYTHON3-CAN INSTALLATION ERROR" --msgbox "PLEASE RESTART THE INSTALLER! \nsudo sh install.sh" 10 60
     exit 0
