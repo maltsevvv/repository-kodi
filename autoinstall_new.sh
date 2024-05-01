@@ -300,17 +300,17 @@ fi
 #               INSTALL SKIN                 #
 ##############################################
 if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-  wget -P /tmp https://github.com/maltsevvv/maltsev-Kodi-Repo/raw/master/kodi18/skin.rnsd/skin.rnsd-18.3.0.zip
-  wget -P /tmp https://github.com/maltsevvv/maltsev-Kodi-Repo/raw/master/repository.maltsev_kodi18/repository.maltsev_kodi18-1.0.0.zip
-  sed -i -e '$i \  <addon optional="true">repository.maltsev_kodi18</addon>' /usr/share/kodi/system/addon-manifest.xml
+  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi18/skin.audi_rns/skin.audi_rns-18.3.0.zip
+  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-18/repository.maltsev_kodi-1.0.0.zip
+  sed -i -e '$i \  <addon optional="true">repository.maltsev_kodi-18</addon>' /usr/share/kodi/system/addon-manifest.xml
 elif grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
-  wget -P /tmp https://github.com/maltsevvv/maltsev-Kodi-Repo/raw/master/kodi19/skin.rnsd/skin.rnsd-19.3.0.zip
-  wget -P /tmp https://github.com/maltsevvv/maltsev-Kodi-Repo/raw/master/repository.maltsev_kodi19/repository.maltsev_kodi19-1.0.0.zip
-  sed -i -e '$i \  <addon>repository.maltsev_kodi19</addon>' /usr/share/kodi/system/addon-manifest.xml
+  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi19/skin.audi_rns/skin.audi_rns-19.3.0.zip
+  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-19/repository.maltsev_kodi-19-1.0.0.zip
+  sed -i -e '$i \  <addon>repository.maltsev_kodi-19</addon>' /usr/share/kodi/system/addon-manifest.xml
 elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-  wget -P /tmp https://github.com/maltsevvv/maltsev-Kodi-Repo/raw/master/kodi20/skin.rnsd/skin.rnsd-20.3.0.zip
-  wget -P /tmp https://github.com/maltsevvv/maltsev-Kodi-Repo/raw/master/repository.maltsev_kodi20/repository.maltsev_kodi20-1.0.0.zip
-  sed -i -e '$i \  <addon>repository.maltsev_kodi19</addon>' /usr/share/kodi/system/addon-manifest.xml
+  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.0.zip
+  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-20/repository.maltsev_kodi-20-1.0.0.zip
+  sed -i -e '$i \  <addon>repository.maltsev_kodi-20</addon>' /usr/share/kodi/system/addon-manifest.xml
 fi
 rm -r /home/pi/.kodi/addons/skin.rns*
 unzip /tmp/skin.rnsd*.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
