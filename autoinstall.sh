@@ -511,21 +511,20 @@ EOF
 enable_tvout=1
 EOF
       sed -i 's/^/vc4.tv_norm=PAL /' /boot/cmdline.txt
-      echo "Add vc4.tv_norm=PAL in /boot/cmdline.txt"
-      echo "NTSC, NTSC-J, NTSC-443, PAL, PAL-M, PAL-N. , PAL60, SECAM"
+      echo "ADD vc4.tv_norm=PAL in /boot/cmdline.txt"
+      echo "PAL | NTSC | NTSC-J | NTSC-443 | PAL-M | PAL-N. | PAL60 | SECAM"
     fi
   else
     sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/firmware/config.txt
     echo "dtoverlay=vc4-kms-v3d,composite"
     echo "By default composite NTSC"
     cat <<'EOF' >> /boot/firmware/config.txt
-
 # Enable Analog Video Output RNS
 enable_tvout=1
 EOF
     sed -i 's/^/vc4.tv_norm=PAL /' /boot/firmware/cmdline.txt
-    echo "Add vc4.tv_norm=PAL in /boot/cmdline.txt"
-    echo "NTSC, NTSC-J, NTSC-443, PAL, PAL-M, PAL-N. , PAL60, SECAM"
+    echo "ADD vc4.tv_norm=PAL in /boot/firmware/cmdline.txtt"
+    echo "PAL | NTSC | NTSC-J | NTSC-443 | PAL-M | PAL-N. | PAL60 | SECAM"
   fi
 fi
 
