@@ -504,25 +504,23 @@ sdtv_aspect=1
 
 EOF
     if grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
+      sed -i 's/^/vc4.tv_norm=PAL /' /boot/cmdline.txt
+      sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/config.txt
+      sed -i 's/dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/config.txt
       cat <<'EOF' >> /boot/config.txt
 enable_tvout=1
 EOF
-    sed 's/^/vc4.tv_norm=PAL /' /boot/cmdline.txt
-    sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/config.txt
-    sed -i 's/dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/config.txt
     fi
   else
+    sed -i 's/^/vc4.tv_norm=PAL /' /boot/firmware/cmdline.txt
+    sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/firmware/config.txt
+    sed -i 's/dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/firmware/config.txt
+
     cat <<'EOF' >> /boot/firmware/config.txt
+
 # Enable Analog Video Output RNS
 enable_tvout=1
-# sdtv_mode=0 NTSC | sdtv_mode=1 NTSC JAPAN | sdtv_mode=2 PAL | sdtv_mode=3 PAL BRAZIL
-sdtv_mode=0
-# sdtv_aspect=1 4:3 | sdtv_aspect=2 14:9 | sdtv_aspect=3 16:9
-sdtv_aspect=1
 EOF
-  sed 's/^/vc4.tv_norm=PAL /' /boot/firmware/cmdline.txt
-  sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/firmware/config.txt
-  sed -i 's/dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-kms-v3d,composite/' /boot/firmware/config.txt
   fi
 fi
 
