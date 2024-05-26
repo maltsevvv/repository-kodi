@@ -22,7 +22,7 @@
 	</requires>
 	<extension point="xbmc.addon.repository" name="Maltsev Add-on repository">
 		<info compressed="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi19/addons.xml</info>
-		<checksum>https://raw.github.com//maltsevvv/repository-kodi/master/kodi19/addons.xml.md5</checksum>
+		<checksum>https://raw.github.com/maltsevvv/repository-kodi/master/kodi19/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi19/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
@@ -38,7 +38,7 @@
 	</requires>
 	<extension point="xbmc.addon.repository" name="Maltsev Add-on repository">
 		<info compressed="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi20/addons.xml</info>
-		<checksum>https://raw.github.com//maltsevvv/repository-kodi/master/kodi20/addons.xml.md5</checksum>
+		<checksum>https://raw.github.com/maltsevvv/repository-kodi/master/kodi20/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/maltsevvv/repository-kodi/master/kodi20/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">

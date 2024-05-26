@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
+<addon id="skin.audi_rns" version="20.3.0" name="Audi (RNS-D | RNS-E | RNS-JP3)" provider-name="Maltsev">
+	<requires>
+		<import addon="xbmc.gui" version="5.16.0"/>
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1024" height="768" default="true" folder="xml" />
+	</extension>
+	<extension point="xbmc.service" library="addon.py" start="login">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">AUDI Navigation plus</summary>
+		<summary lang="ru">AUDI Navigation plus</summary>
+		<description lang="en">Skin for Audi (RNS-D | RNS-E | RNS-JP3), for comfortable use on the radio screen. Control is implemented using standard RNS buttons. https://sites.google.com/view/rnspi </description>
+		<description lang="ru">Обложка для Audi (RNS-D | RNS-E | RNS-JP3), для комфортного использования на экране магнитолы. Управление реализовано штатными кнопками RNS. https://sites.google.com/view/rnspi </description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+		<website>https://sites.google.com/view/rnspi/</website>
+		<assets>
+			<icon>icon.png</icon>
+		</assets>
+	</extension>
+</addon>
 <addon id="skin.audi_rns" version="20.3.1" name="Audi (RNS-D | RNS-E | RNS-JP3)" provider-name="Maltsev">
 	<requires>
 		<import addon="xbmc.gui" version="5.16.0"/>
