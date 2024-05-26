@@ -351,6 +351,11 @@ cat <<'EOF' > /home/pi/.kodi/userdata/sources.xml
             <allowsharing>true</allowsharing>
         </source>
         <source>
+            <name>tvshows</name>
+            <path pathversion="1">/home/pi/tvshows/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
             <name>clips</name>
             <path pathversion="1">/home/pi/clips/</path>
             <allowsharing>true</allowsharing>
