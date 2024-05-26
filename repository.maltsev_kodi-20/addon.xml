@@ -4,7 +4,7 @@
 		<import addon="xbmc.gui" version="5.16.0"/>
 	</requires>
 	<extension point="xbmc.addon.repository" name="Maltsev Add-on repository">
-		<info compressed="true">https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi20/addons.xml</info>
+		<info compressed="false">https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi20/addons.xml</info>
 		<checksum>https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi20/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/kodi20/</datadir>
 	</extension>
