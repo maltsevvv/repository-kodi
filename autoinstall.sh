@@ -315,8 +315,8 @@ elif grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
   wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-19/repository.maltsev_kodi-1.0.0.zip
   sed -i -e '$i \  <addon>repository.maltsev_kodi-19</addon>' /usr/share/kodi/system/addon-manifest.xml
 elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-  #wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.0.zip
-  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.1.zip
+  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.0.zip
+  #wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.1.zip
   wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-20/repository.maltsev_kodi-1.0.0.zip
   sed -i -e '$i \  <addon>repository.maltsev_kodi-20</addon>' /usr/share/kodi/system/addon-manifest.xml
 fi
