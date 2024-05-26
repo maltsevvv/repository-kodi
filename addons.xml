@@ -16,7 +16,7 @@
 		<platform>all</platform>
 	</extension>
 </addon>
-<addon id="repository.maltsev_kodi-18" name="Maltsev Add-on repository" version="1.0.0" provider-name="Maltsev">
+<addon id="repository.maltsev_kodi-19" name="Maltsev Add-on repository" version="1.0.0" provider-name="Maltsev">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0"/>
 	</requires>
