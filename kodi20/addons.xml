@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="skin.audi_rns" version="20.3.0" name="Audi (RNS-D | RNS-E | RNS-JP3)" provider-name="Maltsev">
+<addon id="skin.audi_rns" version="20.3.1" name="Audi (RNS-D | RNS-E | RNS-JP3)" provider-name="Maltsev">
 	<requires>
 		<import addon="xbmc.gui" version="5.16.0"/>
 	</requires>
