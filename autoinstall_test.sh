@@ -331,8 +331,8 @@ sed -i -e '$i \  <addon>repository.maltsev_kodi</addon>' /usr/share/kodi/system/
 echo "---------------------------------------------------------"
 echo "CREATING MEDIA FOLDER"
 echo "---------------------------------------------------------"
-mkdir /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips > /dev/null 2>&1
-chmod -R 0777 /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips > /dev/null 2>&1
+mkdir /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips /home/pi/tvshows > /dev/null 2>&1
+chmod -R 0777 /home/pi/movies /home/pi/music /home/pi/mults /home/pi/clips /home/pi/tvshows > /dev/null 2>&1
 ##############################################
 #                SETTINGS KODI               #
 ##############################################
