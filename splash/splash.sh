@@ -21,7 +21,8 @@ if [ -e /home/pi/splash.png ]; then
 else
   echo "Download splash.png"
   rm /usr/share/plymouth/themes/pix/splash.png
-  wget -P /usr/share/plymouth/themes/pix/ https://raw.githubusercontent.com/maltsevvv/maltsev-Kodi-Repo/master/splash/splash.png
+  #wget -P /usr/share/plymouth/themes/pix/ https://raw.githubusercontent.com/maltsevvv/maltsev-Kodi-Repo/master/splash/splash.png
+  wget -P /usr/share/plymouth/themes/pix/ https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/splash/splash.png
 fi
 
 if (systemctl -q is-active kodi.service); then
