@@ -554,7 +554,7 @@ EOF
 # Enable audio card (HifiBerry DAC HiFi pcm5102a-hifi)
 dtoverlay=hifiberry-dac
 EOF
-    sed -i 's/dtparam=audio=on/#dtparam=audio=on/' /boot/config.txt
+    sed -i 's/dtparam=audio=on/#dtparam=audio=on/' /boot/firmware/config.txt
   fi
 fi
 echo "---------------------------------------------------------"
