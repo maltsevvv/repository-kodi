@@ -578,42 +578,42 @@ dtoverlay=spi-bcm2835-overlay
 EOF
 fi
 
-echo "---------------------------------------------------------"
-echo "Set Audio Card /etc/asound.conf"
-echo "---------------------------------------------------------"
-if ! grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-  if grep -q 'dtoverlay=hifiberry-dac"' /boot/config.txt; then
-    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
-      sed -i 's/0/3/' /etc/asound.conf
-    else
-      sed -i 's/0/2/' /etc/asound.conf
-    fi
-  else
-    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
-      sed -i 's/0/2/' /etc/asound.conf
-    elif grep -q 'Raspberry Pi 5' /proc/device-tree/model; then
-      sed -i 's/0/0/' /etc/asound.conf
-    else
-      sed -i 's/0/1/' /etc/asound.conf
-    fi
-  fi
-elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-  if grep -q 'dtoverlay=hifiberry-dac"' /boot/firmware/config.txt; then
-    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
-      sed -i 's/0/3/' /etc/asound.conf
-    else
-      sed -i 's/0/2/' /etc/asound.conf
-    fi
-  else
-    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
-      sed -i 's/0/2/' /etc/asound.conf
-    elif grep -q 'Raspberry Pi 5' /proc/device-tree/model; then
-      sed -i 's/0/0/' /etc/asound.conf
-    else
-      sed -i 's/0/1/' /etc/asound.conf
-    fi
-  fi
-fi
+#echo "---------------------------------------------------------"
+#echo "Set Audio Card /etc/asound.conf"
+#echo "---------------------------------------------------------"
+#if ! grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
+#  if grep -q 'dtoverlay=hifiberry-dac"' /boot/config.txt; then
+#    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
+#      sed -i 's/0/3/' /etc/asound.conf
+#    else
+#      sed -i 's/0/2/' /etc/asound.conf
+#    fi
+#  else
+#    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
+#      sed -i 's/0/2/' /etc/asound.conf
+#    elif grep -q 'Raspberry Pi 5' /proc/device-tree/model; then
+#      sed -i 's/0/0/' /etc/asound.conf
+#    else
+#      sed -i 's/0/1/' /etc/asound.conf
+#    fi
+#  fi
+#elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
+#  if grep -q 'dtoverlay=hifiberry-dac"' /boot/firmware/config.txt; then
+#    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
+#      sed -i 's/0/3/' /etc/asound.conf
+#    else
+#      sed -i 's/0/2/' /etc/asound.conf
+#    fi
+#  else
+#    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
+#      sed -i 's/0/2/' /etc/asound.conf
+#    elif grep -q 'Raspberry Pi 5' /proc/device-tree/model; then
+#      sed -i 's/0/0/' /etc/asound.conf
+#    else
+#      sed -i 's/0/1/' /etc/asound.conf
+#    fi
+#  fi
+#fi
 
 if (whiptail --title "IR Remote Control" --yesno "Enable IR-Receiver? \nfor Control Kodi, via RNS-JP3 \nWARNING!!!! ONLY FOR RNS-JP3 (Asian)" 10 60); then
   echo "---------------------------------------------------------"
