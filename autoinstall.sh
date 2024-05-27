@@ -308,21 +308,15 @@ fi
 ##############################################
 if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
   wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi18/skin.audi_rns/skin.audi_rns-18.3.0.zip
-  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-18/repository.maltsev_kodi-1.0.0.zip
-  #sed -i -e '$i \  <addon optional="true">repository.maltsev_kodi</addon>' /usr/share/kodi/system/addon-manifest.xml
 elif grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
   wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi19/skin.audi_rns/skin.audi_rns-19.3.0.zip
-  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-19/repository.maltsev_kodi-1.0.0.zip
-  #sed -i -e '$i \  <addon>repository.maltsev_kodi</addon>' /usr/share/kodi/system/addon-manifest.xml
 elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
   wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.0.zip
-  #wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.1.zip
-  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi-20/repository.maltsev_kodi-1.0.0.zip
-  #sed -i -e '$i \  <addon>repository.maltsev_kodi</addon>' /usr/share/kodi/system/addon-manifest.xml
 fi
 rm -r /home/pi/.kodi/addons/skin.audi_rns*
 unzip /tmp/skin.audi_rns*.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
-unzip /tmp/repository.maltsev_kod*.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
+wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi.zip
+unzip /tmp/repository.maltsev_kodi.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
 sed -i -e '$i \  <addon optional="true">skin.audi_rns</addon>' /usr/share/kodi/system/addon-manifest.xml
 sed -i -e 's/lookandfeel.skin" default="true">skin.estuary/lookandfeel.skin">skin.audi_rns/' /home/pi/.kodi/userdata/guisettings.xml
 sed -i -e '$i \  <addon>repository.maltsev_kodi</addon>' /usr/share/kodi/system/addon-manifest.xml
