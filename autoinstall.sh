@@ -514,9 +514,9 @@ if ! grep -q 'mcp2515-can0' $CONFIG; then
   echo "---------------------------------------------------------"
   echo "Enable mcp2515-can0"
   echo "---------------------------------------------------------"
+  sed -i 's/^#\?dtparam=spi=on/dtparam=spi=on/' $CONFIG
   cat <<'EOF' >> $CONFIG
 # Enable MCP2515-can0 oscillator=8000000 or 16000000 and GPIO=25
-dtparam=spi=on
 dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25
 dtoverlay=spi-bcm2835-overlay
 EOF
