@@ -314,6 +314,7 @@ elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
   wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.0.zip
 fi
 rm -r /home/pi/.kodi/addons/skin.audi_rns*
+rm -r /home/pi/.kodi/addons/repository.maltsev*
 unzip /tmp/skin.audi_rns*.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
 wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/repository.maltsev_kodi.zip
 unzip /tmp/repository.maltsev_kodi.zip -d /home/pi/.kodi/addons/ > /dev/null 2>&1
