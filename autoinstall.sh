@@ -439,6 +439,7 @@ if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Outp
     sed -i "/^enable_tvout.*/d" $CONFIG
 	sed -i "s/vc4.tv_norm=PAL //" $CMDLINE
     cat <<'EOF' >> $CONFIG
+
 # hdmi_vga for RNS
 hdmi_force_hotplug=1
 framebuffer_width=400
@@ -473,6 +474,7 @@ else
   sed -i "/^sdtv_.*/d" $CONFIG
   if ! grep -q 'enable_tvout=1' $CONFIG; then
     cat <<'EOF' >> $CONFIG
+
 enable_tvout=1
 EOF
   fi
@@ -484,6 +486,7 @@ EOF
     echo "sdtv_mode=0 NTSC | sdtv_mode=1 NTSC JAPAN | sdtv_mode=2 PAL | sdtv_mode=3 PAL BRAZIL"
 	echo "sdtv_aspect=1 4:3 | sdtv_aspect=2 14:9 | sdtv_aspect=3 16:9"
     cat <<'EOF' >> $CONFIG
+
 # sdtv_mode=0 NTSC | sdtv_mode=1 NTSC JAPAN | sdtv_mode=2 PAL | sdtv_mode=3 PAL BRAZIL
 sdtv_mode=0
 # sdtv_aspect=1 4:3 | sdtv_aspect=2 14:9 | sdtv_aspect=3 16:9
@@ -498,6 +501,7 @@ if (whiptail --title "Enable PCM5102 audio card" --yesno "Use HiFiberry. Audio C
   echo "---------------------------------------------------------"
   if ! grep -q 'hifiberry-dac' $CONFIG; then
     cat <<'EOF' >> $CONFIG
+
 # Enable audio card (hifiberry-dac HiFi pcm5102a-hifi)
 dtoverlay=hifiberry-dac
 EOF
@@ -517,6 +521,7 @@ if ! grep -q 'mcp2515-can0' $CONFIG; then
   echo "---------------------------------------------------------"
   sed -i 's/^#\?dtparam=spi=on/dtparam=spi=on/' $CONFIG
   cat <<'EOF' >> $CONFIG
+
 # Enable MCP2515-can0 oscillator=8000000 or 16000000 and GPIO=25
 dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25
 dtoverlay=spi-bcm2835-overlay
