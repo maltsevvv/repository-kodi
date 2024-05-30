@@ -437,65 +437,63 @@ if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Outp
   echo "---------------------------------------------------------"
   echo "Use HDMI-VGA Adapter For Video Output"
   echo "---------------------------------------------------------"
-  sed $CONFIG -i -e "s/^dtoverlay=vc4-kms-v3d.*/dtoverlay=vc4-fkms-v3d/"
+  sed $CONFIG -i -e "s/^dtoverlay=vc4-.*/dtoverlay=vc4-fkms-v3d/"
+
   if ! grep -q 'hdmi_ignore_edid=0xa5000080' $CONFIG; then
-    sed -i "/^enable_tvout.*/d" $CONFIG
-    sed -i "/.*sdtv_.*/d" $CONFIG
-	sed -i "s/vc4.tv_norm=PAL //" $CMDLINE
     cat <<'EOF' >> $CONFIG
 
-# hdmi_vga for RNS
-hdmi_force_hotplug=1
+# hdmi_vga adapter
 framebuffer_width=400
 framebuffer_height=200
-hdmi_ignore_edid=0xa5000080
+hdmi_force_hotplug=1
 hdmi_group=2
 hdmi_mode=87
+hdmi_ignore_edid=0xa5000080
 hdmi_timings 800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3
 EOF
-    if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then 
-      sed $CONFIG -i -e "s/^hdmi_force_hotplug.*/hdmi_force_hotplug:0/"
-      sed $CONFIG -i -e "s/^hdmi_ignore_edid/hdmi_ignore_edid:0/"
-      sed $CONFIG -i -e "s/^hdmi_group/hdmi_group:0/"
-      sed $CONFIG -i -e "s/^hdmi_mode/hdmi_mode:0/"
-    elif grep -q 'Raspberry Pi 5' /proc/device-tree/model; then 
-      sed $CONFIG -i -e "s/^hdmi_force_hotplug.*/hdmi_force_hotplug:0/"
-      sed $CONFIG -i -e "s/^hdmi_ignore_edid/hdmi_ignore_edid:0/"
-      sed $CONFIG -i -e "s/^hdmi_group/hdmi_group:0/"
-      sed $CONFIG -i -e "s/^hdmi_mode/hdmi_mode:0/"
-    fi
+  elif grep -q 'Raspberry Pi 4' /proc/device-tree/model; then 
+    sed $CONFIG -i -e "s/^hdmi_force_hotplug/hdmi_force_hotplug:0/"
+    sed $CONFIG -i -e "s/^hdmi_group/hdmi_group:0/"
+    sed $CONFIG -i -e "s/^hdmi_mode/hdmi_mode:0/"
+  elif grep -q 'Raspberry Pi 5' /proc/device-tree/model; then 
+    sed $CONFIG -i -e "s/^hdmi_force_hotplug/hdmi_force_hotplug:0/"
+    sed $CONFIG -i -e "s/^hdmi_group/hdmi_group:0/"
+    sed $CONFIG -i -e "s/^hdmi_mode/hdmi_mode:0/"
   fi
+  # Delete
+  sed -i "/^enable_tvout.*/d" $CONFIG
+  sed -i "/^sdtv_.*/d" $CONFIG
+  sed -i "s/vc4.tv_norm=PAL //" $CMDLINE
 else
   echo "---------------------------------------------------------"
   echo "Use Analog Video Output Jack 3,5mm"
   echo "---------------------------------------------------------"
-  sed $CONFIG -i -e "s/^dtoverlay=vc4-fkms-v3d.*/dtoverlay=vc4-kms-v3d,composite/"
-  sed $CONFIG -i -e "s/^dtoverlay=vc4-kms-v3d.*/dtoverlay=vc4-kms-v3d,composite/"
-  sed $CONFIG -i -e "s/^#\?enable_tvout=.*/enable_tvout=1/"
-  sed -i "/^framebuffer_.*/d" $CONFIG
-  sed -i "/^# hdmi_.*/d" $CONFIG
-  sed -i "/^hdmi_.*/d" $CONFIG
-  if ! grep -q 'enable_tvout=1' $CONFIG; then
-    cat <<'EOF' >> $CONFIG
-
-enable_tvout=1
-EOF
-  fi
-  if ! grep -q 'VERSION="10 (buster)"' /etc/os-release && ! grep -q 'vc4.tv.*' $CMDLINE; then
-    echo "ADD vc4.tv_norm=PAL in "$CMDLINE
-    echo "PAL | NTSC | NTSC-J | NTSC-443 | PAL-M | PAL-N. | PAL60 | SECAM"
-    sed $CMDLINE -i -e "s/^/vc4.tv_norm=PAL /"
-  else
+  if grep -q 'VERSION="10 (buster)"' /etc/os-release && ! grep -q 'sdtv_aspect.*' $CONFIG; then
     echo "sdtv_mode=0 NTSC | sdtv_mode=1 NTSC JAPAN | sdtv_mode=2 PAL | sdtv_mode=3 PAL BRAZIL"
-    echo "sdtv_aspect=1 4:3 | sdtv_aspect=2 14:9 | sdtv_aspect=3 16:9"
+	echo "sdtv_aspect=1 4:3 | sdtv_aspect=2 14:9 | sdtv_aspect=3 16:9"
     cat <<'EOF' >> $CONFIG
-	
-sdtv_mode=0
 # sdtv_mode=0 NTSC | sdtv_mode=1 NTSC JAPAN | sdtv_mode=2 PAL | sdtv_mode=3 PAL BRAZIL
+sdtv_mode=0
 # sdtv_aspect=1 4:3 | sdtv_aspect=2 14:9 | sdtv_aspect=3 16:9
 sdtv_aspect=1
 EOF
+  elif ! grep -q 'VERSION="10 (buster)"' /etc/os-release && ! grep -q 'dtoverlay=vc4-kms-v3d,composite' $CONFIG; then
+    sed $CONFIG -i -e "s/^dtoverlay=vc4-.*/dtoverlay=vc4-kms-v3d,composite/"
+    if ! grep -q 'enable_tvout.*' $CONFIG; then
+      cat <<'EOF' >> $CONFIG
+enable_tvout=1
+EOF
+    fi
+    if ! grep -q 'vc4.tv.*' $CMDLINE; then
+    echo "PAL | NTSC | NTSC-J | NTSC-443 | PAL-M | PAL-N. | PAL60 | SECAM"
+    echo "ADD vc4.tv_norm=PAL in "$CMDLINE
+      sed $CMDLINE -i -e "s/^/vc4.tv_norm=PAL /"
+    fi
   fi
+  # Delete
+  sed -i "/^hdmi_.*/d" $CONFIG
+  sed -i "/^# hdmi_.*/d" $CONFIG
+  sed -i "/^framebuffer.*/d" $CONFIG
 fi
 
 if (whiptail --title "Enable PCM5102 audio card" --yesno "Use HiFiberry. Audio Card PCM5102" 10 60) then
