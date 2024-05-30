@@ -533,7 +533,13 @@ if (whiptail --title "IR Remote Control" --yesno "Enable IR-Receiver? \nfor Cont
   echo "---------------------------------------------------------"
   echo "Installing ir-keytable"
   echo "---------------------------------------------------------"
-  sed -i 's/#dtoverlay=gpio-ir,gpio_pin=17/dtoverlay=gpio-ir,gpio_pin=17/' $CONFIG
+  if ! grep -q 'dtoverlay=gpio-ir,.*' $CONFIG; then
+    cat <<'EOF' >> $CONFIG
+
+dtoverlay=gpio-ir,gpio_pin=17
+EOF
+  fi
+
   apt purge lirc
   rm -r /etc/lirc
   apt install -y ir-keytable
@@ -561,11 +567,15 @@ EOF
 #driver table                    file
 *       rc-rc6-mce               nec_rnsjp3.toml
 EOF
+else
+  sed -i "/^dtoverlay=gpio-ir.*/d" $CONFIG
 fi
+
+
+chown -R pi:pi /home/pi/
 
 if (whiptail --title "Installation Completed" --yesno "Reboot System Now" 10 60) then
   cp /boot/canserial.txt /home/pi/.canserial.txt
   cp /boot/.canserial.txt /home/pi/.canserial.txt
-  chown -R pi:pi /home/pi/
   reboot
 fi
