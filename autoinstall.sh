@@ -307,11 +307,11 @@ fi
 #               INSTALL SKIN                 #
 ##############################################
 if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi18/skin.audi_rns/skin.audi_rns-18.3.0.zip
+  wget ––tries=100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi18/skin.audi_rns/skin.audi_rns-18.3.0.zip
 elif grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
-  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi19/skin.audi_rns/skin.audi_rns-19.3.1.zip
+  wget ––tries=100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi19/skin.audi_rns/skin.audi_rns-19.3.1.zip
 elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-  wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.1.zip
+  wget ––tries=100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/skin.audi_rns/skin.audi_rns-20.3.1.zip
 fi
 rm -r /home/pi/.kodi/addons/skin.audi_rns*
 rm -r /home/pi/.kodi/addons/repository.maltsev*
