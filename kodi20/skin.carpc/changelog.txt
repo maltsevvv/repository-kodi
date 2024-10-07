@@ -1,0 +1,12 @@
+1.0.0 - New skin
+
+18.2.6 - add skin settings (horizontal menu)
+[B]2.0.1[/B]
+Добавлены варианты Выключения RPI (перезагрузка или Выключение)
+Добавлена выбор выключение или не выключение RPI, если RNS отключилась
+SD overlay работает без правки raspi-config
+msg
+
+[B]2.0.0[/B]
+if 34f#0001 - tv-tuner off
+reboot system 
