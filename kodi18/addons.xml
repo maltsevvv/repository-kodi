@@ -23,4 +23,27 @@
 		</assets>
 	</extension>
 </addon>
+<addon id="skin.carpc" version="1.0.0" name="CarPC FOR VAG" provider-name="Maltsev">
+	<requires>
+		<import addon="xbmc.gui" version="5.14.0"/>
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1280" height="720" aspect="16:9" default="true" folder="xml" />
+	</extension>
+	<extension point="xbmc.service" library="addon.py" start="login">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">CarPC FOR VAG</summary>
+		<summary lang="ru">CarPC для VAG</summary>
+		<description lang="en">Skin for Audi (RNS-D | RNS-E | RNS-JP3), for comfortable use on the radio screen. Control is implemented using standard RNS buttons. https://sites.google.com/view/rnspi </description>
+		<description lang="ru">Обложка для Audi (RNS-D | RNS-E | RNS-JP3), для комфортного использования на экране магнитолы. Управление реализовано штатными кнопками RNS. https://sites.google.com/view/rnspi </description>
+		<platform>all</platform>
+		<website>https://sites.google.com/view/rnspi/</website>
+		<assets>
+			<icon>icon.png</icon>
+			<screenshot>screenshot-01.png</screenshot>
+		</assets>
+	</extension>
+</addon>
 </addons>
