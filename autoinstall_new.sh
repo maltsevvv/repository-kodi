@@ -1,10 +1,14 @@
 #!/bin/bash
 
+####################################
 SKIN=skin.carpc
 Ver=-1.0.4
 REPOSITORY=repository.maltsev_kodi
 BaseSkin=skin.estuary
 KODI=/home/pi/.kodi/addons/
+####################################
+
+
 
 ping -c1 -w1 google.de 2>/dev/null 1>/dev/null
 if [ "$?" = 0 ]; then
@@ -77,7 +81,15 @@ if [ ! $? = 0 ]; then
   exit 0
 fi
 sed -i '/service.xbmc.versioncheck/d' /usr/share/kodi/system/addon-manifest.xml #Disable versioncheck
-apt install -y kodi-pvr-iptvsimple
+
+echo "---------------------------------------------------------"
+echo "Installing KODI PVR IPTV"
+echo "---------------------------------------------------------"
+apt install -y kodi-pvr-iptvsimple > /dev/null 2>&1
+if [ ! $? = 0 ]; then
+  whiptail --title "KODI PVR IPTV INSTALLATION ERROR" --msgbox "PLEASE RESTART THE INSTALLER!" 10 60
+  exit 0
+fi
 if ! grep -q "/usr/bin/kodi-standalone" /etc/systemd/system/kodi.service; then
   cat <<'EOF' > /etc/systemd/system/kodi.service
 [Unit]
@@ -156,6 +168,10 @@ if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
   echo "---------------------------------------------------------"
   echo "Installing USB AUTOMOUNT"
   echo "---------------------------------------------------------"
+ # apt-cache policy usbmount
+  
+  
+  
   apt install -y usbmount > /dev/null 2>&1
   #apt-cache policy usbmount
   if [ $? = 0 ]; then
@@ -637,19 +653,13 @@ if (whiptail --title "IR Remote Control" --yesno "Enable IR-Receiver? \nfor Cont
   echo "---------------------------------------------------------"
   echo "Installing ir-keytable"
   echo "---------------------------------------------------------"
-  if ! grep -q 'dtoverlay=gpio-ir,.*' $CONFIG; then
-    cat <<'EOF' >> $CONFIG
-
-dtoverlay=gpio-ir,gpio_pin=17
-EOF
-  fi
-
   apt purge lirc
   rm -r /etc/lirc
   apt install -y ir-keytable > /dev/null 2>&1
   if [ ! $? = 0 ]; then
     whiptail --title "ir-keytable INSTALLATION ERROR" --msgbox "PLEASE RESTART THE INSTALLER! \nsudo sh install.sh" 10 60
     exit 0
+  fi
   cat <<'EOF' > /etc/rc_keymaps/nec_rnsjp3.toml
 [[protocols]]
 name = "nec_rnsjp3"
@@ -674,6 +684,13 @@ EOF
 #driver table                    file
 *       rc-rc6-mce               nec_rnsjp3.toml
 EOF
+  
+  if ! grep -q 'dtoverlay=gpio-ir,.*' $CONFIG; then
+    cat <<'EOF' >> $CONFIG
+
+dtoverlay=gpio-ir,gpio_pin=17
+EOF
+  fi
 else
   sed -i "/^dtoverlay=gpio-ir.*/d" $CONFIG
 fi
