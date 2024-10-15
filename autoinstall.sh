@@ -59,7 +59,7 @@ if ! grep -q "/home/pi/" /etc/samba/smb.conf; then
   echo "---------------------------------------------------------"
   echo "Add config SAMBA"
   echo "---------------------------------------------------------"
-  cat <<'EOF' >> /etc/samba/smb.conf > /dev/null 2>&1
+  cat <<'EOF' >> /etc/samba/smb.conf
 [rns]
 path = /home/pi/
 create mask = 0775
