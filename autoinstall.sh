@@ -203,7 +203,7 @@ if (whiptail --title "Bluetooth audio receiver installer" --yesno "Install Bluet
   echo "Installing BLUETOOTHE RECIEVER"
   echo "---------------------------------------------------------"
   hostnamectl set-hostname --pretty "rns"
-  apt install -y --no-install-recommends pulseaudio
+  apt install -y --no-install-recommends pulseaudio > /dev/null 2>&1
   if [ ! $? -eq 0 ]; then
     whiptail --title "PULSEAUDIO INSTALLATION ERROR" --msgbox "PLEASE RESTART THE INSTALLER! \nsudo sh install.sh" 10 60
     exit 0
@@ -231,7 +231,7 @@ Restart=on-failure
 EOF
   systemctl enable --now pulseaudio.service
   systemctl --global mask pulseaudio.socket
-  apt install -y --no-install-recommends bluez-tools pulseaudio-module-bluetooth
+  apt install -y --no-install-recommends bluez-tools pulseaudio-module-bluetooth > /dev/null 2>&1
   if [ ! $? -eq 0 ]; then
     whiptail --title "BLUETOOTH BLUEZ-TOOLS INSTALLATION ERROR" --msgbox "PLEASE RESTART THE INSTALLER! \nsudo sh install.sh" 10 60
     exit 0
