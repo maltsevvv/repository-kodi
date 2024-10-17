@@ -2,7 +2,7 @@
 
 ####################################
 SKIN=skin.carpc
-Ver=-1.0.5
+Ver=-1.0.4
 REPOSITORY=repository.maltsev_kodi
 BaseSkin=skin.estuary
 KODI=/home/pi/.kodi/addons/
@@ -10,12 +10,12 @@ KODI=/home/pi/.kodi/addons/
 
 PI=$(cat /proc/device-tree/model)
 
-#if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-#  if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' /proc/device-tree/model; then 
-#      whiptail --title "ABORT INSTALLATION" --msgbox "YOU ARE USING A VERY OLD SYSTEM.\nYOUR BOARD $PI\nIS NOT SUPPORTED\nUSE BOOKWORM AND A NEW OPERATING SYSTEM!" 10 60
-#      exit 0
-#  fi
-#fi
+# if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
+  # if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' /proc/device-tree/model; then 
+      # whiptail --title "ABORT INSTALLATION" --msgbox "YOU ARE USING A VERY OLD SYSTEM.\nYOUR BOARD $PI\nIS NOT SUPPORTED\nUSE BOOKWORM AND A NEW OPERATING SYSTEM!" 10 60
+      # exit 0
+  # fi
+# fi
 
 
 ping -c1 -w1 google.de 2>/dev/null 1>/dev/null
@@ -556,6 +556,8 @@ fi
 if ! [ -e $CMDLINE'_original.txt' ] ; then
   cp $CMDLINE $CMDLINE'_original.txt'
 fi
+
+
 if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Output?" 10 60); then
   echo "---------------------------------------------------------"
   echo "Use HDMI-VGA Adapter For Video Output"
@@ -618,13 +620,15 @@ else
       sed -i "s/^dtoverlay=vc4-.*/dtoverlay=vc4-kms-v3d,composite/" $CONFIG
     fi
   else #BUSTER
-    sed -i "/^hdmi_.*/d" $CONFIG #Delete hdmi_.*
+    sed -i "/.*hdmi_.*/d" $CONFIG #Delete hdmi_
+	sed -i "/.*sdtv_.*/d" $CONFIG #Delete sdtv_
     if ! grep -q 'sdtv_aspect.*' $CONFIG; then
       echo "---------------------------------------------------------"
       echo $CONFIG 'Default sdtv_aspect=1 4:3'
       echo "aspect=1 4:3 | aspect=2 14:9 | aspect=3 16:9"
       echo "---------------------------------------------------------"
       cat <<'EOF' >> $CONFIG
+
 # sdtv_aspect=1 4:3 | sdtv_aspect=2 14:9 | sdtv_aspect=3 16:9
 sdtv_aspect=1
 EOF
@@ -635,12 +639,20 @@ EOF
       echo 'mode=0 NTSC | mode=1 NTSC JAPAN | mode=2 PAL | mode=3 PAL BRAZIL'
       echo "---------------------------------------------------------"
       cat <<'EOF' >> $CONFIG
+
 # sdtv_mode=0 NTSC | sdtv_mode=1 NTSC JAPAN | sdtv_mode=2 PAL | sdtv_mode=3 PAL BRAZIL
 sdtv_mode=0
 EOF
     fi
+	if ! grep -q 'enable_tvout=1' $CONFIG; then
+		cat <<'EOF' >> $CONFIG
+
+enable_tvout=1
+EOF
+	fi
   fi
 fi
+
 
 
 if (whiptail --title "Enable PCM5102 audio card" --yesno "Use HiFiberry. Audio Card PCM5102" 10 60) then
