@@ -28,25 +28,30 @@ else
   exit 0
 fi
 
-if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-  apt-get update --allow-releaseinfo-change
-fi
-
 echo "---------------------------------------------------------"
 echo "Update System"
 echo "---------------------------------------------------------"
-apt update -y > /dev/null 2>&1
-if [ ! $? = 0 ]; then
-  whiptail --title "UPDATE SYSTEM ERROR" --msgbox "PLEASE RESTART THE INSTALLER!" 10 60
-  exit 0
+if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
+  apt-get update --allow-releaseinfo-change
+else
+  apt update -y
 fi
+
+#echo "---------------------------------------------------------"
+#echo "Update System"
+#echo "---------------------------------------------------------"
+#apt update -y > /dev/null 2>&1
+#if [ ! $? = 0 ]; then
+#  whiptail --title "UPDATE SYSTEM ERROR" --msgbox "PLEASE RESTART THE INSTALLER!" 10 60
+#  exit 0
+#fi
 
 if (whiptail --title "FULL UPGRADE SYSTEM" --yesno "This task, will take a long time." 10 60) then
   echo "---------------------------------------------------------"
   echo "FULL UPGRADE SYSTEM"
   echo "---------------------------------------------------------"
-  apt upgrade -y > /dev/null 2>&1
-  apt autoremove -y > /dev/null 2>&1
+  apt upgrade -y #> /dev/null 2>&1
+  apt autoremove -y #> /dev/null 2>&1
 else
   echo "---------------------------------------------------------"
   echo "YOU CANCELED UPGRADE SYSTEM"
