@@ -10,12 +10,12 @@ KODI=/home/pi/.kodi/addons/
 
 PI=$(cat /proc/device-tree/model)
 
-if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-  if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' /proc/device-tree/model; then 
-      whiptail --title "ABORT INSTALLATION" --msgbox "YOU ARE USING A VERY OLD SYSTEM.\nYOUR BOARD $PI\nIS NOT SUPPORTED\nUSE BOOKWORM AND A NEW OPERATING SYSTEM!" 10 60
-      exit 0
-  fi
-fi
+#if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
+#  if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' /proc/device-tree/model; then 
+#      whiptail --title "ABORT INSTALLATION" --msgbox "YOU ARE USING A VERY OLD SYSTEM.\nYOUR BOARD $PI\nIS NOT SUPPORTED\nUSE BOOKWORM AND A NEW OPERATING SYSTEM!" 10 60
+#      exit 0
+#  fi
+#fi
 
 
 ping -c1 -w1 google.de 2>/dev/null 1>/dev/null
