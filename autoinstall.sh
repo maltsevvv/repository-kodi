@@ -584,17 +584,15 @@ if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Outp
     fi
   else
     sed -i "/^sdtv_.*/d" $CONFIG # Delete Analog Video
-    if ! grep -q 'hdmi_ignore_edid=0xa5000080' $CONFIG; then
+    if ! grep -q 'hdmi_timings.*' $CONFIG; then
       cat <<'EOF' >> $CONFIG
 
 # hdmi_vga adapter
-framebuffer_width=400
-framebuffer_height=200
 hdmi_force_hotplug=1
 hdmi_group=2
 hdmi_mode=87
 hdmi_ignore_edid=0xa5000080
-hdmi_timings 800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3
+hdmi_timings=800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3
 EOF
     fi
   fi
@@ -620,8 +618,7 @@ else
       sed -i "s/^dtoverlay=vc4-.*/dtoverlay=vc4-kms-v3d,composite/" $CONFIG
     fi
   else #BUSTER
-    sed -i "/^hdmi_.*/d" $CONFIG #Delete hdmi_
-    sed -i "/^framebuffer.*/d" $CONFIG #Delete framebuffer
+    sed -i "/^hdmi_.*/d" $CONFIG #Delete hdmi_.*
     if ! grep -q 'sdtv_aspect.*' $CONFIG; then
       echo "---------------------------------------------------------"
       echo $CONFIG 'Default sdtv_aspect=1 4:3'
