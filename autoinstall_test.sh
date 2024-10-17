@@ -594,7 +594,7 @@ if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Outp
       sed -i "s/$/ drm.edid_firmware=HDMI-A-1:Rpi480i_EDID.bin/" $CMDLINE
     fi
   else
-    sed -i "/^sdtv_.*/d" $CONFIG # Delete Analog Video
+    sed -i "/.*sdtv_.*/d" $CONFIG # Delete Analog Video
     if ! grep -q 'hdmi_timings.*' $CONFIG; then
       if grep -q 'Raspberry Pi 4' /proc/device-tree/model; then
         cat <<'EOF' >> $CONFIG
