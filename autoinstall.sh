@@ -2,7 +2,7 @@
 
 ####################################
 SKIN=skin.carpc
-Ver=-1.0.4
+Ver=-1.0.5
 REPOSITORY=repository.maltsev_kodi
 BaseSkin=skin.estuary
 KODI=/home/pi/.kodi/addons/
@@ -28,25 +28,30 @@ else
   exit 0
 fi
 
-if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-  apt-get update --allow-releaseinfo-change
-fi
-
 echo "---------------------------------------------------------"
 echo "Update System"
 echo "---------------------------------------------------------"
-apt update -y > /dev/null 2>&1
-if [ ! $? = 0 ]; then
-  whiptail --title "UPDATE SYSTEM ERROR" --msgbox "PLEASE RESTART THE INSTALLER!" 10 60
-  exit 0
+if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
+  apt-get update --allow-releaseinfo-change
+else
+  apt update -y
 fi
+
+#echo "---------------------------------------------------------"
+#echo "Update System"
+#echo "---------------------------------------------------------"
+#apt update -y > /dev/null 2>&1
+#if [ ! $? = 0 ]; then
+#  whiptail --title "UPDATE SYSTEM ERROR" --msgbox "PLEASE RESTART THE INSTALLER!" 10 60
+#  exit 0
+#fi
 
 if (whiptail --title "FULL UPGRADE SYSTEM" --yesno "This task, will take a long time." 10 60) then
   echo "---------------------------------------------------------"
   echo "FULL UPGRADE SYSTEM"
   echo "---------------------------------------------------------"
-  apt upgrade -y > /dev/null 2>&1
-  apt autoremove -y > /dev/null 2>&1
+  apt upgrade -y #> /dev/null 2>&1
+  apt autoremove -y #> /dev/null 2>&1
 else
   echo "---------------------------------------------------------"
   echo "YOU CANCELED UPGRADE SYSTEM"
@@ -570,7 +575,16 @@ if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Outp
   sed -i -r 's/(.+)vc4.tv_norm.+/\1/' $CMDLINE   #Delete drm.edid
   sed -i "/^enable_tvout.*/d" $CONFIG            # Delete Analog Video
   sed -i -r 's/(.+),composite/\1/' $CONFIG       # Delete Analog Video
-  
+  sed -i "/.*sdtv_.*/d" $CONFIG                  # Delete Analog Video
+  if ! grep -q 'hdmi_timings.*' $CONFIG; then
+    cat <<'EOF' >> $CONFIG
+# hdmi_vga adapter
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_mode=87
+hdmi_timings=640 0 16 88 64 480 0 6 5 13 0 0 0 60 1 12700000 1
+EOF
+  fi
   if ! grep -q 'VERSION="10 (buster)"' /etc/os-release; then
     echo "---------------------------------------------------------"
     echo $CMDLINE 'Default video=HDMI-A-1:NTSC'
@@ -588,27 +602,16 @@ if (whiptail --title "Video Output" --yesno "Use HDMI-VGA Adapter For Video Outp
     if ! grep -q 'Rpi480i_EDID.bin' $CMDLINE; then
       sed -i "s/$/ drm.edid_firmware=HDMI-A-1:Rpi480i_EDID.bin/" $CMDLINE
     fi
-  else
-    sed -i "/^sdtv_.*/d" $CONFIG # Delete Analog Video
-    if ! grep -q 'hdmi_timings.*' $CONFIG; then
-      cat <<'EOF' >> $CONFIG
-
-# hdmi_vga adapter
-hdmi_force_hotplug=1
-hdmi_group=2
-hdmi_mode=87
-hdmi_ignore_edid=0xa5000080
-hdmi_timings=800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3
-EOF
-    fi
   fi
 else
   echo "---------------------------------------------------------"
   echo "Use Analog Video Output Jack 3,5mm"
   echo "---------------------------------------------------------"
+  sed -i "/.*hdmi_.*/d" $CONFIG   #Delete hdmi_
+  sed -i "/.*sdtv_.*/d" $CONFIG   #Delete sdtv_
+  sed -i -r 's/.+(console=serial0)/\1/' $CMDLINE #Delete video=
+  sed -i -r 's/(.+)drm.edid.+/\1/' $CMDLINE #Delete drm.edid
   if ! grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-    sed -i -r 's/.+(console=serial0)/\1/' $CMDLINE #Delete video=
-    sed -i -r 's/(.+)drm.edid.+/\1/' $CMDLINE #Delete drm.edid
     echo "---------------------------------------------------------"
     echo $CMDLINE 'Default vc4.tv_norm=NTSC and video=Composite-1:720x480@60ie'
     echo "PAL | NTSC | NTSC-J | NTSC-443 | PAL-M | PAL-N. | PAL60 | SECAM"
@@ -624,8 +627,6 @@ else
       sed -i "s/^dtoverlay=vc4-.*/dtoverlay=vc4-kms-v3d,composite/" $CONFIG
     fi
   else #BUSTER
-    sed -i "/.*hdmi_.*/d" $CONFIG #Delete hdmi_
-	sed -i "/.*sdtv_.*/d" $CONFIG #Delete sdtv_
     if ! grep -q 'sdtv_aspect.*' $CONFIG; then
       echo "---------------------------------------------------------"
       echo $CONFIG 'Default sdtv_aspect=1 4:3'
@@ -746,5 +747,8 @@ chown -R pi:pi /home/pi/
 
 
 if (whiptail --title "Installation Completed" --yesno "Reboot System Now" 10 60) then
+  echo "---------------------------------------------------------"
+  echo "Reboot System"
+  echo "---------------------------------------------------------"
   reboot
 fi
