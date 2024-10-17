@@ -28,6 +28,10 @@ else
   exit 0
 fi
 
+if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
+  apt-get update --allow-releaseinfo-change
+fi
+
 echo "---------------------------------------------------------"
 echo "Update System"
 echo "---------------------------------------------------------"
