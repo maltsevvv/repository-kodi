@@ -2,7 +2,7 @@
 
 ####################################
 SKIN=skin.carpc
-Ver=-1.0.4
+Ver=-1.0.5
 REPOSITORY=repository.maltsev_kodi
 BaseSkin=skin.estuary
 KODI=/home/pi/.kodi/addons/
