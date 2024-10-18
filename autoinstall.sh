@@ -8,7 +8,7 @@ BaseSkin=skin.estuary
 KODI=/home/pi/.kodi/addons/
 ####################################
 
-PI=$(cat /proc/device-tree/model)
+ModelPI=/proc/device-tree/model
 
 # if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
   # if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' /proc/device-tree/model; then 
@@ -689,12 +689,21 @@ if ! grep -q 'mcp2515-can0' $CONFIG; then
   echo "Enable mcp2515-can0"
   echo "---------------------------------------------------------"
   sed -i 's/^#\?dtparam=spi=on/dtparam=spi=on/' $CONFIG
-  cat <<'EOF' >> $CONFIG
+  if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' $ModelPI; then
+    cat <<'EOF' >> $CONFIG
 
-# Enable MCP2515-can0 oscillator=8000000 or 16000000 and GPIO=25
+# MCP2515-Can0 oscillator=8000000 or 16000000 and GPIO=25
+dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25
+dtoverlay=spi-bcm2837
+EOF
+  else
+    cat <<'EOF' >> $CONFIG
+
+# MCP2515-can0 oscillator=8000000 or 16000000 and GPIO=25
 dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25
 dtoverlay=spi-bcm2835-overlay
 EOF
+  fi
 fi
 
 if (whiptail --title "IR Remote Control" --yesno "Enable IR-Receiver? \nfor Control Kodi, via RNS-JP3 \nWARNING!!!! ONLY FOR RNS-JP3 (Asian)" 10 60); then
