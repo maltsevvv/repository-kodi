@@ -22,6 +22,16 @@ network() {
   ping -c1 -w1 google.de 2>/dev/null 1>/dev/null
 }
 
+update() {
+  echo ${BGreen}"Update Packets"${NC}
+  if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
+    #apt-get update --allow-releaseinfo-change && > /dev/null 2>&1
+	apt-get update -y
+  else
+    apt update -y #> /dev/null 2>&1
+  fi
+}
+
 is_installed() {
   dpkg -s "$1" > /dev/null 2>&1
 }
@@ -671,7 +681,7 @@ EOF
 #driver table                    file
 *       rc-rc6-mce               nec_rnsjp3.toml
 EOF
-
+  fi
 }
 
 
@@ -684,9 +694,9 @@ else
   exit 0
 fi
 
-########################################################################
+update
 if [ "$?" = 0 ]; then
-  apt-get update -y > /dev/null 2>&1
+  echo ${BGreen}"Update Packets"${NC}
 else
   whiptail --title "Inernet Connection" --msgbox "Inernet Connection is Missing \nPlease make sure a internet connection is available \nand than restart installer!" 10 60
   exit 0
