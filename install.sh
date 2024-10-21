@@ -16,10 +16,12 @@ KODI=/home/pi/.kodi/addons/
 
 ModelPI=/proc/device-tree/model
 
+alias apt-get="apt-get --assume-yes"
+
 network() {
   ping -c1 -w1 raspberrypi.org 2>/dev/null 1>/dev/null
   if [ "$?" = 0 ]; then
-    echo ${BGreen}'Internet connection'${NC}
+    echo ${BGreen}'Successfully'${NC}
   else
     whiptail --title "ERROR" --msgbox "Inernet Connection is Missing \nRestart installer!" 10 60
     exit 0
@@ -27,10 +29,10 @@ network() {
 }
 
 update() {
-  echo ${BGreen}'Update Packets'${NC}
+  apt-get update --allow-releaseinfo-change && 2>/dev/null 1>/dev/null
   apt-get update -y 2>/dev/null 1>/dev/null
   if [ "$?" = 0 ]; then
-    echo ${BGreen}'Successfully'${NC}
+    echo ${BGreen}'\\nSuccessfully'${NC}
   else
     whiptail --title "ERROR" --msgbox "Update Packets \nRestart installer!" 10 60
 	exit 0
@@ -38,10 +40,9 @@ update() {
 }
 
 upgrade() {
-  echo ${BGreen}'Upgrade System'${NC}
   apt-get upgrade -y 2>/dev/null 1>/dev/null
   if [ "$?" = 0 ]; then
-    echo ${BGreen}'Successfully'${NC}
+    echo ${BGreen}'\\nSuccessfully'${NC}
   else
     whiptail --title "ERROR" --msgbox "Update Packets \nRestart installer!" 10 60
 	exit 0
@@ -54,9 +55,9 @@ is_installed() {
 
 samba() {
   if is_installed "samba"; then
-    echo ${BGreen}"SAMBA Installed"${NC};
+    echo ${BGreen}'Successfully'${NC}
   else
-    echo ${BGreen}"Installing SAMBA"${NC}
+    echo ${BGreen}'Installing'${NC}
     if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
       echo "samba-common samba-common/workgroup string  WORKGROUP" | debconf-set-selections
       echo "samba-common samba-common/dhcp boolean true" | debconf-set-selections
@@ -89,9 +90,9 @@ EOF
 
 kodi() {
   if is_installed "kodi"; then
-    echo ${BGreen}"Installed KODI"${NC}
+    echo ${BGreen}'Successfully'${NC}
   else
-    echo ${BGreen}"Installing KODI"${NC}
+    echo ${BGreen}'Installing'${NC}
     apt-get install -y kodi 2>/dev/null 1>/dev/null
     if [ "$?" = 0 ]; then
       echo ${BGreen}'Successfully'${NC}
@@ -142,9 +143,9 @@ kodi_status() {
 
 canutils() {
   if is_installed "can-utils"; then
-    echo ${BGreen}"Installed CAN-UTILS"${NC}
+    echo ${BGreen}'Successfully'${NC}
   else
-    echo ${BGreen}"Installing CAN-UTILS"${NC}
+    echo ${BGreen}'Installing'${NC}
     apt install -y can-utils 2>/dev/null 1>/dev/null
     if [ "$?" = 0 ]; then
       echo ${BGreen}'Successfully'${NC}
@@ -168,9 +169,9 @@ EOF
 
 pythoncan() {
   if is_installed "python-can"; then
-    echo ${BGreen}"Installed PYTHON-CAN"${NC}
+    echo ${BGreen}'Successfully'${NC}
   else
-    echo ${BGreen}"Installing PYTHON-CAN"${NC}
+    echo ${BGreen}'Installing'${NC}
     if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
       apt install -y python-can 2>/dev/null 1>/dev/null
       if [ "$?" = 0 ]; then
@@ -194,7 +195,7 @@ pythoncan() {
 overlay() {
   if ! grep -q 'VERSION="10 (buster)"' /etc/os-release; then
     if is_installed "overlayroot"; then
-      ${BGreen}'Installed Overlay SD card'${NC}
+      echo ${BGreen}'Successfully'${NC}
     else
       echo ${BGreen}'Installing Overlay SD card'${NC}
       apt-get install -y overlayroot 2>/dev/null 1>/dev/null
@@ -211,9 +212,9 @@ overlay() {
 usbmount() {
   if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
     if is_installed "usbmount"; then
-      echo ${BGreen}"Installed USBMOUNT"${NC}
+      echo ${BGreen}'Successfully'${NC}
     else
-      echo ${BGreen}"Installing USBMOUNT"${NC}
+      echo ${BGreen}'Installing USBMOUNT'${NC}
       apt-get install -y usbmount 2>/dev/null 1>/dev/null
       if [ "$?" = 0 ]; then
 	    echo ${BGreen}'Successfully'${NC}
@@ -242,23 +243,28 @@ usbmount() {
 }
 
 bluetooth() {
-  hostnamectl set-hostname --pretty "rns"
-  apt install -y --no-install-recommends pulseaudio 2>/dev/null 1>/dev/null
-  if [ ! $? -eq 0 ]; then
-    whiptail --title "PULSE AUDIO" --msgbox "ERROR Installing \nRestart installer!" 10 60
-    exit 0
-  fi
-  usermod -a -G pulse-access root
-  usermod -a -G bluetooth pulse
-  if ! grep -q '/run/pulse/native' /etc/pulse/client.conf; then
-    mv /etc/pulse/client.conf /etc/pulse/client.conf.orig
-    cat <<'EOF' >> /etc/pulse/client.conf
+  if is_installed "pulseaudio"; then
+    echo ${BGreen}'Pulseaudio Successfully'${NC}
+  else
+    hostnamectl set-hostname --pretty "rns"
+    apt install -y --no-install-recommends pulseaudio 2>/dev/null 1>/dev/null
+    if [ $? -eq 0 ]; then
+      echo ${BGreen}'Pulseaudio Successfully'${NC}
+    else
+      whiptail --title "PULSE AUDIO" --msgbox "ERROR Installing \nRestart installer!" 10 60
+      exit 0
+    fi
+    usermod -a -G pulse-access root
+    usermod -a -G bluetooth pulse
+    if ! grep -q '/run/pulse/native' /etc/pulse/client.conf; then
+      mv /etc/pulse/client.conf /etc/pulse/client.conf.orig
+      cat <<'EOF' >> /etc/pulse/client.conf
 default-server = /run/pulse/native
 autospawn = no
 EOF
-  fi
-  sed -i '/^load-module module-native-protocol-unix$/s/$/ auth-cookie-enabled=0 auth-anonymous=1/' /etc/pulse/system.pa
-  cat <<'EOF' > /etc/systemd/system/pulseaudio.service
+    fi
+    sed -i '/^load-module module-native-protocol-unix$/s/$/ auth-cookie-enabled=0 auth-anonymous=1/' /etc/pulse/system.pa
+    cat <<'EOF' > /etc/systemd/system/pulseaudio.service
 [Unit]
 Description=Sound Service
 [Install]
@@ -269,19 +275,31 @@ PrivateTmp=true
 ExecStart=/usr/bin/pulseaudio --daemonize=no --system --disallow-exit --disable-shm --exit-idle-time=-1 --log-target=journal --realtime --no-cpu-limit
 Restart=on-failure
 EOF
-  systemctl enable --now pulseaudio.service
-  systemctl --global mask pulseaudio.socket
-  apt install -y --no-install-recommends bluez-tools 2>/dev/null 1>/dev/null
-  if [ ! $? -eq 0 ]; then
-    whiptail --title "bluez-tools" --msgbox "ERROR Installing \nRestart installer!" 10 60
-    exit 0
+    systemctl enable --now pulseaudio.service
+    systemctl --global mask pulseaudio.socket
   fi
-  apt install -y --no-install-recommends pulseaudio-module-bluetooth 2>/dev/null 1>/dev/null
-  if [ ! $? -eq 0 ]; then
-    whiptail --title "pulseaudio-module-bluetooth" --msgbox "ERROR Installing \nRestart installer!" 10 60
-    exit 0
+  if is_installed "bluez-tools"; then
+    echo ${BGreen}'\\nBluez-Tools Successfully'${NC}
+  else
+    echo ${BGreen}'\\nInstalling Bluez-Tools'${NC}
+    apt install -y --no-install-recommends bluez-tools 2>/dev/null 1>/dev/null
+    if [ $? -eq 0 ]; then
+      echo ${BGreen}'\\nSuccessfully'${NC}
+    else
+      whiptail --title "bluez-tools" --msgbox "ERROR Installing \nRestart installer!" 10 60
+      exit 0
+    fi
   fi
-  cat <<'EOF' > /etc/bluetooth/main.conf
+  if is_installed "pulseaudio-module-bluetooth"; then
+    echo ${BGreen}'\\nPulseaudio-Module-Bluetooth Successfully'${NC}
+  else
+    echo ${BGreen}'\\nInstalling Pulseaudio-Module-Bluetooth'${NC}
+    apt install -y --no-install-recommends pulseaudio-module-bluetooth 2>/dev/null 1>/dev/null
+    if [ ! $? -eq 0 ]; then
+      whiptail --title "pulseaudio-module-bluetooth" --msgbox "ERROR Installing \nRestart installer!" 10 60
+      exit 0
+    fi
+    cat <<'EOF' > /etc/bluetooth/main.conf
 [General]
 Class = 0x200414
 DiscoverableTimeout = 0
@@ -289,13 +307,13 @@ DiscoverableTimeout = 0
 [Policy]
 AutoEnable=true
 EOF
-  mkdir -p /etc/systemd/system/bthelper@.service.d
-  cat <<'EOF' > /etc/systemd/system/bthelper@.service.d/override.conf
+    mkdir -p /etc/systemd/system/bthelper@.service.d
+    cat <<'EOF' > /etc/systemd/system/bthelper@.service.d/override.conf
 [Service]
 Type=oneshot
 EOF
 
-  cat <<'EOF' > /etc/systemd/system/bt-agent@.service
+    cat <<'EOF' > /etc/systemd/system/bt-agent@.service
 [Unit]
 Description=Bluetooth Agent
 Requires=bluetooth.service
@@ -313,12 +331,13 @@ KillSignal=SIGUSR1
 [Install]
 WantedBy=multi-user.target
 EOF
-  systemctl daemon-reload
-  systemctl enable bt-agent@hci0.service
-  usermod -a -G bluetooth pulse
-  if ! grep -q 'module-bluetooth-discover' /etc/pulse/system.pa; then
-    echo "load-module module-bluetooth-policy" >> /etc/pulse/system.pa
-    echo "load-module module-bluetooth-discover" >> /etc/pulse/system.pa
+    systemctl daemon-reload
+    systemctl enable bt-agent@hci0.service
+    usermod -a -G bluetooth pulse
+    if ! grep -q 'module-bluetooth-discover' /etc/pulse/system.pa; then
+      echo "load-module module-bluetooth-policy" >> /etc/pulse/system.pa
+      echo "load-module module-bluetooth-discover" >> /etc/pulse/system.pa
+    fi
   fi
   if ! grep -q 'bluetoothctl discoverable on' /usr/local/bin/bluetooth-udev; then
     cat <<'EOF' > /usr/local/bin/bluetooth-udev
@@ -352,41 +371,43 @@ EOF
 skin_download() {
   if grep -q 'VERSION="10 (buster)"' /etc/os-release; then
     if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BGreen}"DOWNLOADING" $SKIN$Ver${NC}
+      echo ${BGreen}'DOWNLOADING' $SKIN$Ver${NC}
       wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi18/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
     elif [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BGreen}"DOWNLOADED" $SKIN$Ver.zip${NC}
+      echo ${BGreen}'DOWNLOADED' $SKIN$Ver.zip${NC}
     fi
 
   elif grep -q 'VERSION="11 (bullseye)"' /etc/os-release; then
     if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BGreen}"DOWNLOADING" $SKIN$Ver${NC}
+      echo ${BGreen}'DOWNLOADING' $SKIN$Ver${NC}
       wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi19/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
     elif [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BGreen}"DOWNLOADED" $SKIN$Ver.zip${NC}
+      echo ${BGreen}'DOWNLOADED' $SKIN$Ver.zip${NC}
     fi
 
   elif grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
     if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BGreen}"DOWNLOADING" $SKIN$Ver${NC}
+      echo ${BGreen}'DOWNLOADING' $SKIN$Ver${NC}
       wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
     elif [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BGreen}"DOWNLOADED" $SKIN$Ver.zip${NC}
+      echo ${BGreen}'DOWNLOADED' $SKIN$Ver.zip${NC}
     fi
-  else 
+  else
+
     if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BRed}"ERROR DOWNLOADS" $SKIN$Ver${NC}
+      echo ${BRed}'ERROR DOWNLOADS' $SKIN$Ver${NC}
       exit 0
     fi
     if ! [ -e /tmp/$REPOSITORY.zip ] ; then
-      echo ${BRed}"ERROR DOWNLOADS" $REPOSITORY.zip${NC}
+      echo ${BRed}'ERROR DOWNLOADS' $REPOSITORY.zip${NC}
 	  exit 0
     fi
   fi
   if ! [ -e /tmp/$REPOSITORY.zip ] ; then
     echo ${BGreen}'\\nDOWNLOADING' $REPOSITORY.zip${NC}
     wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/$REPOSITORY.zip > /dev/null 2>&1
-  elif [ -e /tmp/$REPOSITORY.zip ] ; then
+  fi
+  if [ -e /tmp/$REPOSITORY.zip ] ; then
     echo ${BGreen}'\\nDOWNLOADED' $REPOSITORY.zip${NC}
   fi
 }
@@ -636,51 +657,60 @@ EOF
 
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'Internet connection'${NC}
 echo $(network)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'Update Packets'${NC}
 echo $(update)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
 if (whiptail --title "FULL UPGRADE SYSTEM" --yesno "Installation is Recommended.\nBut it will take a long time" 10 60); then
+  echo ${BBlue}'Upgrade System'${NC}
   echo $(upgrade)
 else
-  echo ${BRed}"YOU CANCELED UPGRADE SYSTEM"${NC}
+  echo ${BRed}'YOU CANCELED UPGRADE SYSTEM'${NC}
 fi
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'SAMBA Installed'${NC}
 echo $(samba)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'Installed KODI'${NC}
 echo $(kodi)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'Installed CAN-UTILS'${NC}
 echo $(canutils)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'Installed PYTHON-CAN'${NC}
 echo $(pythoncan)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'Installed Overlay SD card'${NC}
 echo $(overlay)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BBlue}'Installed USBMOUNT'${NC}
 echo $(usbmount)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
 if (whiptail --title "Bluetooth audio receiver installer" --yesno "Install Bluetooth Audio Receive." 10 60) then
-  echo ${BGreen}'Installing BLUETOOTHE RECIEVER'${NC}
+  echo ${BBlue}'Installing BLUETOOTHE RECIEVER'${NC}
   echo $(bluetooth)
 else
-  echo ${BRed}"YOU CANCELED THE INSTALLATION BLUETOOTH RECIEVER"${NC}
+  echo ${BRed}'YOU CANCELED THE INSTALLATION BLUETOOTH RECIEVER'${NC}
 fi
 echo '---------------------------------------------------------'
 
