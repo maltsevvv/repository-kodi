@@ -1,3 +1,5 @@
+[![Release Version](https://img.shields.io/github/release/]
+
 ## Скрипт для автоматической установки  
 
     wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
