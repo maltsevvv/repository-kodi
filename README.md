@@ -1,4 +1,3 @@
-[![Release Version](https://img.shields.io/github/release/]
 
 ## Скрипт для автоматической установки  
 
