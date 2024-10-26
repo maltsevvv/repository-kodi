@@ -1,3 +1,4 @@
+![GitHub Downloads (specific asset, specific tag)](https://img.shields.io/github/downloads/maltsevvv/repository-kodi/blob/master/kodi20/skin.carpc/skin.carpc-1.0.5.zip)
 
 
 ## Скрипт для автоматической установки  
