@@ -1,4 +1,7 @@
 
+https://simpleicons.org/?q=kodi
+
+
 ## Скрипт для автоматической установки  
 
     wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
