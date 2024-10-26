@@ -1,5 +1,3 @@
-![screenshot of sample]([https://simpleicons.org/?q=kodi.svg)]
-
 
 
 ## Скрипт для автоматической установки  
