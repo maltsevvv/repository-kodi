@@ -1,7 +1,7 @@
 [![OS - Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux&logoColor=white)](https://www.linux.org/ "Go to Linux homepage")
 [![Made with Python](https://img.shields.io/badge/Python->=3.10-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage")
 
-[![OS - Buster](https://img.shields.io/badge/OS-Buster-blue?logo=rpi&logoColor=white)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
+[![OS - Buster](https://img.shields.io/badge/OS-Buster-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
 
 ## Скрипт для автоматической установки  
 
