@@ -1,4 +1,7 @@
-[![Release Version](![GitHub Tag](https://img.shields.io/github/v/tag/maltsevvv/repository-kodi))
+[![(![GitHub Tag](https://img.shields.io/github/v/tag/maltsevvv/repository-kodi))
+
+[![Release Version](https://img.shields.io/github/release/maltsevvv/repository-kodi.svg?style=plastic)](https://github.com/maltsevvv/repository-kodi/releases/latest/)
+[![Release Date](https://img.shields.io/github/release-date/maltsevvv/repository-kodi.svg?style=plastic)](https://github.com/maltsevvv/repository-kodi/releases/latest/)
 
 ## Скрипт для автоматической установки  
 
