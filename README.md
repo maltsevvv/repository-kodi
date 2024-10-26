@@ -1,4 +1,4 @@
-[![OS - Buster](https://img.shields.io/badge/OS-Buster_Kodi_18-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
+[![OS - Buster](https://img.shields.io/badge/OS-Buster_(Kodi_18)-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
 
 ## Скрипт для автоматической установки  
 
