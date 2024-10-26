@@ -1,3 +1,4 @@
+[![Release Version](![GitHub Tag](https://img.shields.io/github/v/tag/maltsevvv/repository-kodi))
 
 ## Скрипт для автоматической установки  
 
