@@ -3,7 +3,13 @@
 [![Release Version](https://img.shields.io/github/release/maltsevvv/repository-kodi.svg?style=plastic)](https://github.com/maltsevvv/repository-kodi/releases/latest/)
 [![Release Date](https://img.shields.io/github/release-date/maltsevvv/repository-kodi.svg?style=plastic)](https://github.com/maltsevvv/repository-kodi/releases/latest/)
 
-![Auto update](https://img.shields.io/github/directory-file-count/maltsevvv/repository-kodi?type=file&extension=repository.maltsev_kodi.zip&style=for-the-badge)
+
+![GitHub repo file or directory count (in path)](https://img.shields.io/github/directory-file-count/maltsevvv/repository-kodi/kodi18%2Fskin.carpc?type=file&extension=zip&style=flat-square&label=for%20kodi%2018)
+
+
+![GitHub repo file or directory count (in path)](https://img.shields.io/github/directory-file-count/maltsevvv/repository-kodi/kodi20%2Fskin.carpc?type=file&extension=zip&style=flat-square&label=for%20kodi%2020)
+
+
 
 
 ## Скрипт для автоматической установки  
