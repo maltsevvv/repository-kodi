@@ -1,4 +1,4 @@
-![screenshot of sample]([http://webdesign.ru.net/images/Heydon_min.jpg](https://simpleicons.org/?q=kodi.svg)
+![screenshot of sample]([https://simpleicons.org/?q=kodi.svg)]
 
 
 
