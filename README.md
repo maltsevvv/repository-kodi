@@ -1,6 +1,7 @@
 [![OS - Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux&logoColor=white)](https://www.linux.org/ "Go to Linux homepage")
 [![Made with Python](https://img.shields.io/badge/Python->=3.10-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage")
-[![Made with Python](https://img.shields.io/badge/Kodi=18-blue?logo=kodi&logoColor=white)]([https://python.org](https://github.com/maltsevvv/repository-kodi/blob/master/kodi20/skin.carpc/skin.carpc-1.0.5.zip "kodi20/skin.carpc")
+
+[![OS - Buster](https://img.shields.io/badge/OS-Buster-blue?logo=rpi&logoColor=white)](https://www.linux.org/ "Go to Linux homepage")
 
 ## Скрипт для автоматической установки  
 
