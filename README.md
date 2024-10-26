@@ -1,5 +1,4 @@
 [![OS - Buster](https://img.shields.io/badge/OS-Buster_(Kodi_18)-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
-
 [![OS - Bookworm](https://img.shields.io/badge/OS-Bookworm_(Kodi_20)-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2024-07-04/2024-07-04-raspios-bookworm-arm64-lite.img.xz "Downloads Bookworm")
 ## Скрипт для автоматической установки  
 
