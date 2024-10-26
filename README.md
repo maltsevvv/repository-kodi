@@ -1,7 +1,10 @@
-[![(![GitHub Tag](https://img.shields.io/github/v/tag/maltsevvv/repository-kodi))
+[(![GitHub Tag](https://img.shields.io/github/v/tag/maltsevvv/repository-kodi))
 
 [![Release Version](https://img.shields.io/github/release/maltsevvv/repository-kodi.svg?style=plastic)](https://github.com/maltsevvv/repository-kodi/releases/latest/)
 [![Release Date](https://img.shields.io/github/release-date/maltsevvv/repository-kodi.svg?style=plastic)](https://github.com/maltsevvv/repository-kodi/releases/latest/)
+
+![Auto update](https://img.shields.io/github/directory-file-count/maltsevvv/repository-kodi?type=file&extension=repository.maltsev_kodi.zip&style=for-the-badge)
+
 
 ## Скрипт для автоматической установки  
 
