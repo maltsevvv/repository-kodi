@@ -1,5 +1,8 @@
 [![OS - Buster](https://img.shields.io/badge/OS-Buster_(Kodi_18)-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
 [![OS - Bookworm](https://img.shields.io/badge/OS-Bookworm_(Kodi_20)-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2024-07-04/2024-07-04-raspios-bookworm-arm64-lite.img.xz "Downloads Bookworm")
+
+[![Repo - Kodi](https://img.shields.io/badge/Repo-repository.maltsev_kodi.zip-red?logo=linux&logoColor=white)](https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/repository.maltsev_kodi.zip "Downloads Repository for auto update skin")
+
 ## Скрипт для автоматической установки  
 
     wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
