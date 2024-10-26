@@ -1,5 +1,5 @@
 
-https://simpleicons.org/?q=kodi
+![https://simpleicons.org/?q=kodi]
 
 
 ## Скрипт для автоматической установки  
