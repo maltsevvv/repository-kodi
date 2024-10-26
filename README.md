@@ -1,6 +1,4 @@
-<a href="#" class="button">Post comment (link)</a>
-<input class="button" type="submit" value="Post comment (input)">
-<button class="button" type="submit">Post comment (button)</button>
+[![OS - Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux&logoColor=white)](https://www.linux.org/ "Go to Linux homepage")
 
 
 ## Скрипт для автоматической установки  
