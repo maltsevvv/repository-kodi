@@ -1,7 +1,7 @@
 ![Static Badge](https://img.shields.io/badge/2%203%204%205%20-2%203%204%205?style=plastic&logo=raspberrypi&label=Raspberry%20PI&cacheSeconds=https%3A%2F%2Fwww.raspberrypi.com%2F&link=https%3A%2F%2Fwww.raspberrypi.com%2F)
 
 [![OS - Buster](https://img.shields.io/badge/OS-Buster_(Kodi_18)-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
-[![OS - Bookworm](https://img.shields.io/badge/OS-Bookworm_(Kodi_20)-blue?logo=linux&logoColor=white)](https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2024-07-04/2024-07-04-raspios-bookworm-arm64-lite.img.xz "Downloads Bookworm")
+[![OS - Bookworm](https://img.shields.io/badge/OS-Bookworm_(Kodi_20)-blue?logo=linux&logo)](https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2024-07-04/2024-07-04-raspios-bookworm-arm64-lite.img.xz "Downloads Bookworm")
 
 [![KODI-repository](https://img.shields.io/badge/KODI-repository.maltsev_kodi.zip-red?logo=kodi&logoColor=white)](https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/repository.maltsev_kodi.zip "Downloads Repository for auto update skin")
 
