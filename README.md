@@ -6,7 +6,7 @@
 
 [![KODI-repository](https://img.shields.io/badge/KODI-repository.maltsev_kodi.zip-red?logo=kodi)](https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/repository.maltsev_kodi.zip "Downloads Repository for auto update skin")
 
-[![KODI-skin](https://img.shields.io/badge/KODI20-skin.carpc-red?logo=kodi)](https://github.com/maltsevvv/repository-kodi/blob/master/kodi20/skin.carpc/skin.carpc-1.0.5.zip "Downloads Repository for auto update skin")
+[![KODI-skin](https://img.shields.io/badge/KODI_20-skin.carpc-red?logo=kodi)](https://github.com/maltsevvv/repository-kodi/blob/master/kodi20/skin.carpc/skin.carpc-1.0.5.zip "Downloads Repository for auto update skin")
 
 
 ## Скрипт для автоматической установки  
