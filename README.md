@@ -5,6 +5,9 @@
 
 [![KODI-repository](https://img.shields.io/badge/KODI-repository.maltsev_kodi.zip-red?logo=kodix&logoColor=white)](https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/repository.maltsev_kodi.zip "Downloads Repository for auto update skin")
 
+
+![Static Badge](https://img.shields.io/badge/KODI-KODI?style=plastic&logo=kodi&label=repository.maltsev_kodi.zip&link=https%3A%2F%2Fgithub.com%2Fmaltsevvv%2Frepository-kodi%2Fraw%2Frefs%2Fheads%2Fmaster%2Frepository.maltsev_kodi.zip)
+
 ## Скрипт для автоматической установки  
 
     wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
