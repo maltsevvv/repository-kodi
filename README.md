@@ -11,8 +11,16 @@
 
     wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
     sudo sh /tmp/autoinstall.sh
+***
+## MCP2515 NiRen connect to Raspberry PI
+[![RPI-CAN](https://a.d-cd.net/9jgqB46_p_7EVcuZrn7L6AQwxfg-1920.jpg)
 
+## Possibility of receiving video on RNSD
+[![RNSD](https://github.com/maltsevvv/repository-kodi/blob/master/img/rnsd.png)
 
+## Possibility of receiving video on RNSE
+[![RNSE](https://github.com/maltsevvv/repository-kodi/blob/master/img/rnse.png)
+***
 ## Raspberry Pi Audio Receiver
 
 Через телефон передаем аудио на Raspberry, а затем звук выводится на аудио систему.
