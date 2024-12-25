@@ -8,7 +8,8 @@
 
 
 ## Скрипт для автоматической установки  
-
+    sudo apt-get update  
+    sudo apt-get upgrade -y  
     wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
     sudo sh /tmp/autoinstall.sh
 ***
