@@ -13,7 +13,7 @@
     wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
     sudo sh /tmp/autoinstall.sh
 ***
-## MCP2515 NiRen connect to Raspberry PI
+## MCP2515(tja1050) NiRen connect to Raspberry PI
 [![RPI-CAN](https://a.d-cd.net/9jgqB46_p_7EVcuZrn7L6AQwxfg-1920.jpg)
 
 ## Possibility of receiving video on RNSD
