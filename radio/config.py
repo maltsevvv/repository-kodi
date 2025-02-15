@@ -19,11 +19,11 @@ https://github.com/peetereczek/openauto-audi-api
 
 #  MFSW (multi function steering wheel) will autodetect if it is installed
 
-activate_rnse_tv_input = 'false'
-control_pi_by_rns_e_buttons = 'false'
+activate_rnse_tv_input = 'true'
+control_pi_by_rns_e_buttons = 'true'
 
-activate_rnsd_tv_input = 'true'
-control_pi_by_rns_d_buttons = 'true'
+activate_rnsd_tv_input = 'false'
+control_pi_by_rns_d_buttons = 'false'
 
 control_pi_by_mfsw = 'true'
 read_and_set_time_from_dis = 'true'
