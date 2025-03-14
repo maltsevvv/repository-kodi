@@ -445,12 +445,10 @@ kodi_set() {
 EOF
 
 
-  if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-    # Disable Screensaver
-    sed -i 's/default="true">screensaver.xbmc.builtin.dim<\/setting/\//' /home/pi/.kodi/userdata/guisettings.xml
-	# Enable auto play next video
-    sed -i 's/id="videoplayer.autoplaynextitem" default="true" \/>id="videoplayer.autoplaynextitem">0,1,2,3,4<\/setting>/' /home/pi/.kodi/userdata/guisettings.xml
-  fi
+# Disable Screensaver
+  sed -i 's/default="true">screensaver.xbmc.builtin.dim<\/setting/\//' /home/pi/.kodi/userdata/guisettings.xml
+# Enable auto play next video
+  sed -i 's/id="videoplayer.autoplaynextitem" default="true" \/>id="videoplayer.autoplaynextitem">0,1,2,3,4<\/setting>/' /home/pi/.kodi/userdata/guisettings.xml
 
 # Amplifi volume up to 30.0dB
   sed -i 's/volumeamplification>0.000000/volumeamplification>30.000000/' /home/pi/.kodi/userdata/guisettings.xml
@@ -524,14 +522,18 @@ rpi_vga() {
     if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' $ModelPI; then
       if ! [ -e /usr/lib/firmware/Rpi480i_EDID.bin ] ; then
         echo ${BGreen}'Downloads Rpi480i'${NC}
-        wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/old_install/Rpi480i_EDID.bin && > /dev/null 2>&1
-        cp /tmp/Rpi480i_EDID.bin /usr/lib/firmware/Rpi480i_EDID.bin
+        wget -P /usr/lib/firmware/ https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/old_install/Rpi480i_EDID.bin && > /dev/null 2>&1
       fi
+      if ! [ -e /usr/lib/firmware/Rpi240p_EDID_EDID.bin ] ; then
+        echo ${BGreen}'Downloads Rpi240p'${NC}
+        wget -P /usr/lib/firmware/ https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/old_install/Rpi240p_EDID.bin && > /dev/null 2>&1
+      fi	  
       if ! grep -q 'video=HDMI-A-1:NTSC' $CMDLINE; then
-        sed -i 's/^/video=HDMI-A-1:NTSC,margin_left=29,margin_right=10,margin_top=0,margin_bottom=15 /' $CMDLINE
+        sed -i 's/^/video=HDMI-A-1:NTSC,margin_left=39,margin_right=21,margin_top=17,margin_bottom=27 /' $CMDLINE  #rnse
       fi
       if ! grep -q 'Rpi480i_EDID.bin' $CMDLINE; then
         sed -i 's/$/ drm.edid_firmware=HDMI-A-1:Rpi480i_EDID.bin/' $CMDLINE
+		#sed -i 's/$/ drm.edid_firmware=HDMI-A-1:Rpi240p_EDID.bin/' $CMDLINE 
       fi
       if ! grep -q 'hdmi_timings=' $CONFIG; then                         # Add For HDMI
         sed -i '/disable_overscan=1/a\hdmi_timings=640 0 16 88 64 480 0 6 5 13 0 0 0 60 1 12700000 3' $CONFIG # Add load serial For HDMI
@@ -543,6 +545,7 @@ rpi_vga() {
     if ! grep -q 'hdmi_group=2' $CONFIG; then                         # Add For HDMI
       sed -i '/disable_overscan=1/a\hdmi_group=2' $CONFIG             # Add load serial For HDMI
     fi
+
   fi
   sed -i 's/^#\?#disable_overscan=1/disable_overscan=1/' $CONFIG     # Edit For HDMI
   sed -i 's/^#\?hdmi_force_hotplug=1/hdmi_force_hotplug=1/' $CONFIG  # Edit For HDMI
@@ -553,17 +556,8 @@ rpi_vga() {
   if ! grep -q 'hdmi_timings=' $CONFIG; then                         # Add For HDMI
     #if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' $ModelPI; then
     sed -i '/hdmi_mode=/a\hdmi_timings=640 0 16 88 64 480 0 6 5 13 0 0 0 60 1 12700000 3' $CONFIG
-    # else
-      # #sed -i 's/^#\?dtoverlay=vc4-kms-.*/dtoverlay=vc4-fkms-v3d/' $CONFIG
-      # sed -i '/hdmi_mode=/a\hdmi_timings=800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3' $CONFIG
-    # fi
-  fi
-  if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-	wget -P /usr/lib/firmware/ https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/old_install/Rpi480i_EDID.bin
-	wget -P /usr/lib/firmware/ https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/old_install/Rpi240p_EDID.bin
-	sed -i 's/^/video=HDMI-A-1:NTSC,margin_left=39,margin_right=21,margin_top=17,margin_bottom=27 /' $CMDLINE  #rnse
-	sed -i 's/$/ drm.edid_firmware=HDMI-A-1:Rpi480i_EDID.bin/' $CMDLINE 
-	#sed -i 's/$/ drm.edid_firmware=HDMI-A-1:Rpi240p_EDID.bin/' $CMDLINE 
+    # sed -i '/hdmi_mode=/a\hdmi_timings=800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3' $CONFIG
+    fi
   fi
 }
 
@@ -733,7 +727,10 @@ fi
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
-echo $(kodi_status) && $(skin_download) && $(skin_install) && $(kodi_set)
+echo $(kodi_status)
+echo $(skin_download)
+echo $(skin_install)
+echo $(kodi_set)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
