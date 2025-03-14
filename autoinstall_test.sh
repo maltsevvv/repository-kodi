@@ -341,35 +341,20 @@ EOF
 }
 
 skin_download() {
-  if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-    if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
-      echo ${BGreen}'DOWNLOADING' $SKIN$Ver${NC}
-      wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
-    else
-      whiptail --title "DOWNLOADING" $SKIN$Ver --msgbox "ERROR DOWNLOADING \nRestart installer!" 10 60
-      exit 0
-    fi
+  if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
+    echo ${BGreen}'DOWNLOADING' $SKIN$Ver${NC}
+    wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
+	unzip -o /tmp/$SKIN$Ver.zip -d $KODI > /dev/null 2>&1
   fi
 
   if ! [ -e /tmp/$REPOSITORY.zip ] ; then
     echo ${BGreen}'\\nDOWNLOADING' $REPOSITORY.zip${NC}
     wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/$REPOSITORY.zip > /dev/null 2>&1
-  else
-    whiptail --title "DOWNLOADING" $REPOSITORY --msgbox "ERROR DOWNLOADING \nRestart installer!" 10 60
-    exit 0
+	unzip -o /tmp/$REPOSITORY.zip -d $KODI > /dev/null 2>&1
   fi
 }
 
-skin_install() {
-  if [ -e /tmp/$SKIN$Ver.zip ] ; then
-    echo ${BGreen}'\\nUNZIP' $SKIN$Ver${NC}
-    unzip -o /tmp/$SKIN$Ver.zip -d $KODI > /dev/null 2>&1
-  fi
-  if [ -e /tmp/$REPOSITORY.zip ] ; then
-    echo ${BGreen}'\\nUNZIP' $REPOSITORY${NC}
-    unzip -o /tmp/$REPOSITORY.zip -d $KODI > /dev/null 2>&1
-  fi
-}
+
 kodi_set() {
   if ! grep -q $SKIN /usr/share/kodi/system/addon-manifest.xml; then
     echo ${BGreen}$SKIN '\\nto addon-manifest.xml'${NC}
@@ -729,7 +714,6 @@ echo '---------------------------------------------------------'
 echo '---------------------------------------------------------'
 echo $(kodi_status)
 echo $(skin_download)
-echo $(skin_install)
 echo $(kodi_set)
 echo '---------------------------------------------------------'
 
@@ -744,13 +728,8 @@ if (whiptail --title "Video Output" --yes-button " HDMI-VGA " --no-button " ANAL
 else
   echo ${BGreen}"Use Analog Video Output Jack 3,5mm"${NC}
   $(rpi_composite)
-  if ! grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-    echo ${BRed}$CMDLINE${NC} '\nvc4.tv_norm='${BBlue}'PAL'${NC} ${BBlue}'\nNTSC'${NC} '|' ${BBlue}'PAL\n'${NC}
-    echo ${BRed}$CMDLINE${NC} '\nvideo=Composite-1:'${BBlue}'720x576@50ie'${NC} ${BBlue}'\n720x576@50ie'${NC} 'for' ${BGreen}'PAL'${NC} ${BBlue}'\n720x480@60ie'${NC} 'for' ${BGreen}'NTSC\n'${NC}
-  elif grep -q 'VERSION="10 (buster)"' /etc/os-release; then
-    echo ${BRed}$CONFIG${NC} 'sdtv_mode='${BBlue}'2'${NC} ${BBlue}'\n0'${NC} 'NTSC |' ${BBlue}'1'${NC} 'NTSC JAPAN |' ${BBlue}'2'${NC} 'PAL |' ${BBlue}'3'${NC} 'PAL BRAZIL\n'${NC}
-    echo ${BRed}$CONFIG${NC} 'sdtv_aspect='${BBlue}'1'${NC} ${BBlue}'\n1'${NC} '4:3 |' ${BBlue}'2'${NC} '14:9 |' ${BBlue}'3'${NC} '16:9'
-  fi
+  echo ${BRed}$CMDLINE${NC} '\nvc4.tv_norm='${BBlue}'PAL'${NC} ${BBlue}'\nNTSC'${NC} '|' ${BBlue}'PAL\n'${NC}
+  echo ${BRed}$CMDLINE${NC} '\nvideo=Composite-1:'${BBlue}'720x576@50ie'${NC} ${BBlue}'\n720x576@50ie'${NC} 'for' ${BGreen}'PAL'${NC} ${BBlue}'\n720x480@60ie'${NC} 'for' ${BGreen}'NTSC\n'${NC}
 fi
 echo '---------------------------------------------------------'
 
@@ -789,6 +768,8 @@ echo '---------------------------------------------------------'
 echo '\\\\'$(hostname -I | awk '{print $1}')'\\''rns'
 echo '\\\\'$(hostname -I | awk '{print $2}')'\\''rns'
 echo '---------------------------------------------------------'
+
+chown -R pi:pi /home/pi/
 
 echo '---------------------------------------------------------'
 if (whiptail --title "Installation Completed" --yesno "Reboot System Now\nIf everything is fine, then after the reboot \nyou will see a window for entering the activation code" 10 60); then
