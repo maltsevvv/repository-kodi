@@ -556,7 +556,7 @@ rpi_vga() {
     # else
       # #sed -i 's/^#\?dtoverlay=vc4-kms-.*/dtoverlay=vc4-fkms-v3d/' $CONFIG
       # sed -i '/hdmi_mode=/a\hdmi_timings=800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3' $CONFIG
-    fi
+    # fi
   fi
   if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
 	wget -P /usr/lib/firmware/ https://github.com/maltsevvv/repository-kodi/raw/refs/heads/master/old_install/Rpi480i_EDID.bin
