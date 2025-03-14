@@ -344,13 +344,19 @@ skin_download() {
   if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
     if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
       echo ${BGreen}'DOWNLOADING' $SKIN$Ver${NC}
-      wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
+      wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
+    else
+      whiptail --title "DOWNLOADING" $SKIN$Ver --msgbox "ERROR DOWNLOADING \nRestart installer!" 10 60
+      exit 0
     fi
   fi
 
   if ! [ -e /tmp/$REPOSITORY.zip ] ; then
     echo ${BGreen}'\\nDOWNLOADING' $REPOSITORY.zip${NC}
-    wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/$REPOSITORY.zip > /dev/null 2>&1
+    wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/$REPOSITORY.zip > /dev/null 2>&1
+  else
+    whiptail --title "DOWNLOADING" $REPOSITORY --msgbox "ERROR DOWNLOADING \nRestart installer!" 10 60
+    exit 0
   fi
 }
 
@@ -358,16 +364,10 @@ skin_install() {
   if [ -e /tmp/$SKIN$Ver.zip ] ; then
     echo ${BGreen}'\\nUNZIP' $SKIN$Ver${NC}
     unzip -o /tmp/$SKIN$Ver.zip -d $KODI > /dev/null 2>&1
-  else
-    wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
-	unzip -o /tmp/$SKIN$Ver.zip -d $KODI > /dev/null 2>&1
   fi
   if [ -e /tmp/$REPOSITORY.zip ] ; then
     echo ${BGreen}'\\nUNZIP' $REPOSITORY${NC}
     unzip -o /tmp/$REPOSITORY.zip -d $KODI > /dev/null 2>&1
-  else
-    wget -t 100 -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/$REPOSITORY.zip > /dev/null 2>&1
-	unzip -o /tmp/$REPOSITORY.zip -d $KODI > /dev/null 2>&1
   fi
 }
 kodi_set() {
