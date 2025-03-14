@@ -557,7 +557,7 @@ rpi_vga() {
     #if grep -q 'Raspberry Pi 4\|Raspberry Pi 5' $ModelPI; then
     sed -i '/hdmi_mode=/a\hdmi_timings=640 0 16 88 64 480 0 6 5 13 0 0 0 60 1 12700000 3' $CONFIG
     # sed -i '/hdmi_mode=/a\hdmi_timings=800 0 51 44 121 460 0 10 9 14 0 0 0 32 1 16000000 3' $CONFIG
-    fi
+    #fi
   fi
 }
 
