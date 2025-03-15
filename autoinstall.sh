@@ -16,6 +16,20 @@ KODI=/home/pi/.kodi/addons/
 
 ModelPI=/proc/device-tree/model
 
+check() {
+  if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
+    if [ $USER != "pi1" ]; then
+      echo "You created a user" ${BRed}$USER${NC}
+      echo "You must create a user" ${BGreen}pi${NC}
+      exit 1
+    fi
+  else
+    echo "Unsupported OS detected. Recommended Debian 12 Bookworm"
+    exit 1
+  fi
+}
+
+
 network() {
   ping -c1 -w1 raspberrypi.org 2>/dev/null 1>/dev/null
   if [ "$?" = 0 ]; then
@@ -650,7 +664,9 @@ EOF
 
 
 
-
+echo '---------------------------------------------------------'
+echo $(check)
+echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
 echo ${BBlue}'Internet connection'${NC}
