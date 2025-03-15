@@ -722,6 +722,12 @@ echo $(folder)
 echo '---------------------------------------------------------'
 
 echo '---------------------------------------------------------'
+echo ${BGreen}'Backup config.txt cmdline.txt'${NC}
+cp $CONFIG $CONFIG.backup
+cp $CMDLINE $CMDLINE.backup
+echo '---------------------------------------------------------'
+
+echo '---------------------------------------------------------'
 if (whiptail --title "Video Output" --yes-button " HDMI-VGA " --no-button " ANALOG VIDEO " --yesno "Select video output source" 10 60); then
   echo ${BGreen}"Use HDMI-VGA Adapter For Video Output"${NC}
   echo $(rpi_vga)
