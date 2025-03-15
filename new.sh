@@ -20,7 +20,7 @@ trap "exit 1" TERM
 export TOP_PID=$$
 
 
-os() {
+chekos() {
 	if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
 	  echo cat /etc/os-release
 	else
@@ -587,7 +587,9 @@ EOF
 }
 
 #####################INSTALL##################################
+
 echo '---------------------------------------------------------'
+echo $(chekos)
 echo ${BBlue}'Internet connection'${NC}
 echo $(network)
 echo '---------------------------------------------------------'
