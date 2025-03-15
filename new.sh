@@ -22,7 +22,7 @@ export TOP_PID=$$
 
 chekos() {
 	if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-	  echo cat /etc/os-release
+		echo cat /etc/os-release
 	else
 		echo "Unsupported OS detected. Recommended Debian 12 Bookworm"
 		kill -s TERM $TOP_PID
@@ -325,13 +325,13 @@ EOF
 }
 
 skin_download() {
-	if ! [ -e /tmp/$SKIN$Ver.zip ] ; then
+	if ! [ -e /tmp/$SKIN$Ver.zip ]; then
 		echo ${BGreen}'DOWNLOADING' $SKIN${NC}
 		wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/kodi20/$SKIN/$SKIN$Ver.zip > /dev/null 2>&1
 		unzip -o /tmp/$SKIN$Ver.zip -d $KODI > /dev/null 2>&1
 	fi
 
-	if ! [ -e /tmp/$REPOSITORY.zip ] ; then
+	if ! [ -e /tmp/$REPOSITORY.zip ]; then
 		echo ${BGreen}'\\nDOWNLOADING' $REPOSITORY.zip${NC}
 		wget -P /tmp https://github.com/maltsevvv/repository-kodi/raw/master/$REPOSITORY.zip > /dev/null 2>&1
 		unzip -o /tmp/$REPOSITORY.zip -d $KODI > /dev/null 2>&1
@@ -587,7 +587,6 @@ EOF
 }
 
 #####################INSTALL##################################
-
 echo '---------------------------------------------------------'
 echo $(chekos)
 echo ${BBlue}'Internet connection'${NC}
