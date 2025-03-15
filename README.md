@@ -8,10 +8,22 @@
 
 
 ## Скрипт для автоматической установки  
-    sudo apt-get update  
-    sudo apt-get upgrade -y  
-    wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
-    sudo sh /tmp/autoinstall.sh
+```
+sudo apt-get update
+```
+
+```
+sudo apt-get upgrade -y
+```
+
+```
+wget -P /tmp https://raw.githubusercontent.com/maltsevvv/repository-kodi/master/autoinstall.sh
+```
+
+```
+sudo sh /tmp/autoinstall.sh
+```
+
 ***
 ## MCP2515(sn65hvd230) NiRen connect to Raspberry PI. Recommended
 [![RPI-CAN](https://github.com/maltsevvv/repository-kodi/blob/master/img/rpi+mcp2515sn230+pcm5102.png)
