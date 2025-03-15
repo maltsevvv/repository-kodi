@@ -18,7 +18,7 @@ ModelPI=/proc/device-tree/model
 
 check() {
   if grep -q 'VERSION="12 (bookworm)"' /etc/os-release; then
-    if [ $USER != "pi1" ]; then
+    if [ $USER != "pi" ]; then
       echo "You created a user" ${BRed}$USER${NC}
       echo "You must create a user" ${BGreen}pi${NC}
       exit 1
