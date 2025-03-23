@@ -538,7 +538,7 @@ EOF
 
 # MCP2515-can0 oscillator=8000000 or 16000000 and GPIO=25
 dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25
-dtoverlay=spi-bcm2835-overlay
+ 
 EOF
 		fi
 	fi
@@ -579,6 +579,21 @@ variant = "rc6"
 0x87 = "KEY_NEXTSONG"
 EOF
 
+	if ! grep -q "Description=IR Remote" /etc/systemd/system/ir_remote.service; then
+		cat <<'EOF' > /etc/systemd/system/ir_remote.service
+[Unit]
+Description=IR Remote
+After=kodi.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ir-keytable -c -p rc-6 --write=/etc/rc_keymaps/rc6_mce.toml --sysdev=rc0
+[Install]
+WantedBy=default.target
+EOF
+
+		sudo systemctl enable ir_remote.service
+		sudo systemctl start ir_remote.service
+	fi
 }
 
 #####################INSTALL##################################
