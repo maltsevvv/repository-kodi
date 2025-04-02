@@ -1,3 +1,5 @@
+New link repo https://github.com/maltsevvv/skin.carpc   
+
 [![Raspberry - Buster](https://img.shields.io/badge/Raspberry-Buster_(Kodi_18)-blue?logo=raspberrypi&logoColor=red)](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip "Downloads Buster")
 [![Raspberry - Bookworm](https://img.shields.io/badge/Raspberry-Bookworm_(Kodi_20)-blue?logo=raspberrypi&logoColor=red)](https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2024-07-04/2024-07-04-raspios-bookworm-arm64-lite.img.xz "Downloads Bookworm")
 
